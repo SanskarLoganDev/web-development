@@ -1,8 +1,19 @@
 body{
     background-color: rgb(135, 168, 211);
-    color: white;
+    color: black;
 }
 
 td{
     border: 2px solid black;
+}
+
+p{
+    background-color: aquamarine;
+}
+a{
+    background-color: bisque;
+}
+
+div{
+    background-color: aqua;
 }
