@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Form to apply for TA</h1>
+    <form action="post">
+      <div>
+        <label for="username">Enter your username: </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          
+        />
+      </div>
+      <div>
+        <!-- Here we have the same name as "gender" so that only 1 can be selected and in labels we have enetered their id so when we click on the text it will select that corresponding radio button -->
+        <!-- If we mess up the for in label then we have to click on the radio button circle to select a gender. But if its correct, clicking on the text would select tha gender. -->
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label>
+      </div>
+      <div>
+        <input type="checkbox" id="subscribe" name="subscribe" value="yes" />
+        <label for="subscribe">Subscribe to newsletter</label>
+      </div>
+      <div>
+        <label for="text">Enter your comment:</label>
+        <br> 
+        <!-- br tag is not recommended for use -->
+        <textarea id="text" name="comment" rows="4" cols="50">
+      </textarea>
+      </div>
+      <div>
+        <label for="fruits">Select your fruit: </label>
+        <select id="fruits" name="fruits">
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="cherry">Cherry</option>
+      </select>
+      </div>
+    </form>
+  </body>
+</html>
