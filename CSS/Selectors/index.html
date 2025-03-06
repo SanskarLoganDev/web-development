@@ -1,22 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CSS Selectors</title>
     <style>
-        /* Element Selector */
-        div{
-            color: red;
-        }
+            /* Element Selector */
+            div {
+              color: violet;
+            }
+
+            /* Class selector: Overwrites Element selector */
+            .red {
+              color: red;
+            }
+
+            /* ID Selector */
+            #green {
+              color: green;
+            }
+
+            /* Child Selector: Overwrites Element selector */
+            div > p {
+              color: blue;
+            }
+            div > h2 {
+              color: blue;
+            }
+
+            /* Descendant Selector: Overwrites Element selector */
+            div p {
+              color: orange;
+            }
+
+            /* Universal Selector */
+            * {
+              margin: 0;
+              padding: 0;
+            }
+
+            /* The most important ones are above*/
+            /* Pseudo Selector */
+            a:visited{
+              color: yellow;
+            }
+            a:link{
+              color: green;
+            }
+            a:active{
+              background-color: red;
+            }
+            a:hover{
+              background-color: blue;
+            }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div>Hi there, I am a division</div>
+    <div class="red">I am another division red</div>
+    <p id="green">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi praesentium
+      exercitationem dolor.
+    </p>
+    <div><h2>This is an example of child selector</h2></div>
     <div>
-        Hi there, I am a division
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque a, ex
+        eligendi fugiat totam rem aperiam dicta accusantium nisi iure!
+      </p>
     </div>
     <div>
-        I am another division
+      <span
+        ><p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi amet
+          mollitia voluptas fuga magni dignissimos.
+        </p></span
+      >
     </div>
-</body>
+    <a href="https://www.google.com">google.com</a> <br />
+    <a href="https://www.facebook.com">facebook.com</a>
+  </body>
 </html>
