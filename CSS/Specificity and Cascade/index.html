@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Specificity and Cascade</title>
+    <style>
+      h1 {
+        color: aqua;
+      }
+      .yellow {
+        color: yellow;
+      }
+      .cred {
+        color: red;
+      }
+      .cpurple {
+        color: purple;
+      }
+      p {
+        color: blue !important;
+      }
+      ul {
+        margin: 10px;
+        padding-left: 20px;
+      }
+      /* Attribute selector */
+      [data-x="a"] {
+        background-color: rgb(214, 185, 185);
+      }
+      li.cred {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 class="yellow cred cpurple" data-x="a">CSS Specificity</h1>
+      <p style="color: green">
+        The order of specificity is: <br />
+        Inline Style > ID Selector > Class or Attribute Selector > Element
+        Selector > Universal Selector <br />
+        And within same specificity the last one is applied. When we use the
+        keyword important then it has the highest priority
+      </p>
+    </div>
+    <div>
+      <h2>Specificity calculation</h2>
+      <span
+        >To calculate specificity, assign a value to each part of the
+        selector:</span
+      >
+      <ul>
+        <li>Universal Selector: 0</li>
+        <li>Element selectors and pseudo-elements: 1</li>
+        <li>Class selectors, attribute selectors, and pseudo-classes: 10</li>
+        <li>ID selectors: 100</li>
+        <li>Inline styles: 1000</li>
+      </ul>
+    </div>
+    <h3>Specificity Calculation:</h3>
+    <ol>
+      <li class="cred">Specificity for h3.cred would be 1+10=11</li>
+      <li>
+        Ex: a.harryclass.rohan-class[href]:hover { color: red; } <br />
+        <p>You can break down its components:</p>
+        <ul>
+          <li>Element selectors: a contributes 1 point.</li>
+          <li>
+            Class selectors: .harryclass and .rohan-class each contributes 10
+            points, totaling 20 points.
+          </li>
+          <li>Attribute selector: [href] contributes 10 points.</li>
+          <li>Pseudo-class: :hover adds another 10 points.</li>
+        </ul>
+        <p>
+          Add up all these values: 1 (element) + 20 (classes) + 10 (attribute) +
+          10 (pseudo-class) = 41. So, the specificity value of the selector
+          a.harryclass.rohan-class[href]:hover will be 41.
+        </p>
+      </li>
+    </ol>
+  </body>
+</html>
