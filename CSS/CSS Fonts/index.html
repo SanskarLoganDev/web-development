@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Fonts</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&display=swap" rel="stylesheet"> -->
+    <!-- inlcuding Baloo Bhai2 font using link-->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&display=swap");
+      h1 {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      p {
+        /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+        font-family: "Baloo Bhai 2", sans-serif;
+        /*font-style: italic;*/
+        font-weight: 500; /*Used for bolding*/
+        font-size: 20px;
+        line-height: 1.5; /*Used for sapce between lines*/
+      }
+      h2{
+        text-transform: capitalize;
+        text-decoration: underline;
+        text-decoration-color: red;
+        text-decoration-style: dotted;
+        text-decoration-thickness: 5px;
+        text-indent: 10px;
+        text-align: center;
+      }
+      .lorem{
+        border: 2px solid red;
+        width: 45px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .lorem2{
+        border: 2px solid blueviolet;
+        width: 150px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- https://codepen.io/web-dot-dev/pen/yLojraG -->
+    <div>
+      <h1>Fonts</h1>
+      <h2>about fonts</h2>
+      <p>We are practising fonts</p>
+      <p class="lorem">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+        praesentium cum ipsum, ducimus, dolorem odit asperiores fuga distinctio
+        debitis quidem minima, impedit repellendus.
+      </p>
+      <p class="lorem2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, repellat!
+      </p>
+    </div>
+  </body>
+</html>
