@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Sizing units</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html{
+        font-size: 12px;
+      }
+      .box {
+        box-sizing: border-box;
+        border: 2px solid black;
+        /* width: 233px; */
+        width: 80vw; /* vw is viewport weight*/
+        margin: auto; /* to center an element i.e., automatic width */
+        height: 10vh;
+        background-color: aqua;
+      }
+      .container {
+        box-sizing: border-box;
+        border: 2px solid black;
+        /* width: 2048px; */
+        width: 80vw;
+        /* height: 80vh; used to set height as 80% of vertical view port*/
+        min-height: 80vh;
+        margin: 23px auto; /* 23px is for top bottom and auto for left right*/
+        font-size: 18px;
+        background-color: aquamarine;
+      }
+      .container> div {
+        font-size: 2em; /*meaning is will double the size inherited from container (above) that is 36px*/
+        /*font-size: 2rem; meaning is will double the size inherited from root (html) that is 24px*/
+        width: 50%; /*50% of parent*/
+        border: 2px solid red;
+      }
+      .mycont{
+        border: 2px solid black;
+        box-sizing: border-box;
+        margin: 23px auto;
+        color: black;
+        font-size: 22px;
+        width: 80vw;
+      }
+      .info{
+        font-size: 20px;
+        margin: 20px;
+      }
+      li{
+        margin-left: 20px;
+      }
+      .container > div > div{
+        border: 2px solid blue;
+        width: 50%
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units -->
+    <div class="box">This is a box</div>
+    <div class="container">
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum veniam inventore, rem itaque deserunt atque quibusdam qui dignissimos esse provident, totam delectus omnis ea nobis aperiam architecto, eaque facere odit libero vero. Tempore culpa tempora expedita voluptatum rerum tenetur eaque dolore, at deserunt optio molestias ipsam consectetur nemo adipisci sapiente. 
+        
+        <div>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci autem labore numquam et illum maxime.
+
+        </div>
+      </div>
+    </div>
+    <div class="info"><h3>vh and vw units</h3>
+    <p>Viewport-based units vh and vw allow you to size elements relative to the browser's viewport dimensions:  
+        <ul>
+
+        <li>vh (viewport height):
+        
+        1vh is equal to 1% of the viewport's height.
+        For example, if the viewport height is 900px, then 1vh = 9px.</li>
+
+        <li>vw (viewport width):
+        
+        1vw equals 1% of the viewport's width.
+        So if the viewport width is 1200px, then 1vw = 12px.</li>
+    </ul>
+    </p>
+    </div>
+    <div class="mycont">This is another container</div>
+  </body>
+</html>
