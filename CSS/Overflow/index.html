@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overflow</title>
+    <style>
+      .box {
+        width: 30vw;
+        height: 30vh;
+        border: 2px solid black;
+        overflow: auto; /*scroll provides scroll bar even there is no overflow but auto does only when there is overflow*/
+        overflow-x: hidden;
+        overflow-y: auto;
+        /* overflow: scroll hidden; /*first is x and second is y*/
+        /*text-overflow: ellipsis; /*... at the end of text*/
+        /*white-space: nowrap; /*Text only goes horizontally and not vertically*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui a error neque eaque perspiciatis magni deleniti sint. Deleniti quam excepturi provident nemo, exercitationem iste debitis tempore quisquam doloribus non, id qui et consequuntur quaerat nesciunt laboriosam illum fugiat perferendis eligendi maxime delectus blanditiis cum ea eaque? Impedit autem aliquam quidem.
+    </div>
+    <div>
+      <p>Types of overflow:</p>
+      <ol>
+        <li>
+          Scroll: It adds an automatic scroller in the container so for the
+          seeing the content it can be scrolled without affecting the container
+          dimensions.
+        </li>
+        <li>
+            Auto: It is quite similar to scroll but the scroller is only added when the content starts getting out of the container. Mostly this option is used to avoid unnecessary scroll bars if the content already is within the content dimensions.
+        </li>
+        <li>
+            Hidden: It hides the content which doesn’t fit the box.
+        </li>
+        <li>
+            Clip: (similar to hidden), programatically dsiables scrolling
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
