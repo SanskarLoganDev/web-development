@@ -25,16 +25,17 @@
       h2{
         text-transform: capitalize;
         text-decoration: underline;
-        text-decoration-color: red;
-        text-decoration-style: dotted;
+        text-decoration-color: red; /*Used for changing the color of underline*/
+        text-decoration-style: dotted; /*Used for making the underline dotted, dashed, wavy etc. */
         text-decoration-thickness: 5px;
         text-indent: 10px;
         text-align: center;
+        letter-spacing: 20px; /*Used for spacing between letters*/
       }
       .lorem{
         border: 2px solid red;
-        width: 45px;
-        text-overflow: ellipsis;
+        width: 450px;
+        text-overflow: ellipsis; /*This is used to add ... at the end of the text if it overflows. But for this to work, we need to set overflow to hidden and white-space to nowrap. */
         overflow: hidden;
       }
       .lorem2{

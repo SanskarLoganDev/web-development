@@ -8,10 +8,10 @@
       .box {
         border: 2px solid black;
         padding: 30px;
-        box-shadow: 5px 5px 15px 5px green inset;
+        box-shadow: 5px 5px 15px 5px green; /* h-offset v-offset blur spread color inset */
       }
       .text {
-        text-shadow: 2px 2px 4px #841d56;
+        text-shadow: 2px 2px 4px #841d56; /* h-offset v-offset blur color */
         font-size: 20px;
         outline: 2px solid black;
         border: 2px solid green;
@@ -33,7 +33,7 @@
         <li>inset: Makes the shadow inner.</li>
       </ul>
     </div>
-    <div>
+    <div style="margin-top: 40px;"> <!-- added the margin here to separate the 2 boxes -->
       <p class="text">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et at dolor
         placeat voluptatum consequatur, ipsum id provident, deserunt laborum

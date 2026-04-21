@@ -58,9 +58,19 @@
             a:hover{
               background-color: blue;
             }
+
+            /* if p is the first child of its parent, apply these properties */
+            p:first-child{
+              background-color: aqua;
+            }
+
     </style>
   </head>
   <body>
+    <main>
+      <p> I am first</p>
+      <p>I am second</p> <!-- This is to demo first-child selector -->
+    </main>
     <div>Hi there, I am a division</div>
     <div class="red">I am another division red</div>
     <p id="green">
