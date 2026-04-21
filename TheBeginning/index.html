@@ -1,44 +1,84 @@
-<!-- This html has table, image, inline and block elements, aduio and video -->
+<!-- This html has table, image, inline and block elements, audio and video -->
 
+<!-- DOCTYPE declaration: tells the browser this is an HTML5 document -->
 <!DOCTYPE html>
+
+<!-- <html> is the root element wrapping the entire page. lang="en" sets the language for accessibility/SEO -->
 <html lang="en">
   <head>
+    <!-- <head> contains metadata (info about the page) — nothing here is visible on the page -->
+
+    <!-- charset="UTF-8" supports all characters including emojis and special symbols -->
     <meta charset="UTF-8" />
+
+    <!-- viewport meta tag makes the page responsive on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- description meta tag is used by search engines as a page summary -->
     <meta name="description" content="This is just the beginning!" />
+
+    <!-- <title> sets the text shown on the browser tab -->
     <title>Logan's first website</title>
+
+    <!-- <link> connects an external CSS stylesheet to this HTML file -->
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
+    <!-- <body> contains everything visible on the webpage -->
+
+    <!-- <p> is a paragraph tag — a block-level element, always starts on a new line -->
     <p>Logan is great! yes he is the Wolverine!</p>
+
+    <!-- <img> embeds an image. width sets size in px, src is the file path, alt is fallback text for screen readers -->
     <img width="230" src="wolverine.jpg" alt="The Wolverine" />
+
+    <!-- <br> is a self-closing line break tag — adds a blank line of space -->
     <br />
+
+    <!-- <h2> is a heading tag (h1–h6). h1 is the largest/most important, h6 the smallest -->
     <h2>Tables</h2>
+
+    <!-- <table> creates a table. Tables are made of rows (<tr>) and cells (<td> or <th>) -->
     <table>
+
+      <!-- <caption> adds a visible title above the table -->
       <caption>
         Mutant Details
       </caption>
+
+      <!-- <thead> groups the header row(s) of the table — helps browsers and screen readers identify headers -->
       <thead>
+        <!-- <tr> is a table row -->
         <tr>
+          <!-- <th> is a header cell — bold and centered by default -->
           <th>Name</th>
           <th>Age</th>
           <th>Species</th>
         </tr>
       </thead>
+
+      <!-- <tbody> groups the main data rows of the table -->
       <tbody>
         <tr>
+          <!-- <td> is a standard data cell -->
           <td>Logan</td>
           <td>200</td>
           <td>Mutant</td>
         </tr>
         <tr>
+          <!-- colspan="2" makes this cell span 2 columns horizontally -->
           <td colspan="2">Scott</td>
+          <!-- rowspan="2" makes this cell span 2 rows vertically -->
           <td rowspan="2">Mutant</td>
         </tr>
         <tr>
+          <!-- This row only has 2 cells because the "Mutant" cell above spans into this row -->
           <td colspan="2">Scott</td>
         </tr>
       </tbody>
+
+      <!-- <tfoot> groups the footer row(s) — useful for totals or summary rows -->
       <tfoot>
         <tr>
           <td>James</td>
@@ -47,15 +87,32 @@
         </tr>
       </tfoot>
     </table>
+
     <br />
+
     <h2>Block and Inline elements</h2>
+    <!-- Block elements start on a new line and take up the full width available -->
+    <!-- Inline elements flow within the text and only take up as much width as needed -->
+
+    <!-- <p> is a BLOCK element -->
     <p>Para is a block element</p>
+
+    <!-- <a> is an INLINE element. href sets the URL the link goes to -->
     <a href="https://google.com">A href/links are an inline element</a>
+
+    <!-- <div> is a generic BLOCK container, used to group and layout sections -->
     <div>div is a block element</div>
+
+    <!-- <span> is a generic INLINE container, used to style a piece of text within a line -->
     <span>span is an inline element</span>
+
     <a href="https://google.com">Yes he is inline</a>
+
     <h2>Audio and Video tags</h2>
+
+    <!-- <div> wrapping the video just groups it as a block section -->
     <div>
+      <!-- <video> embeds a video. controls shows play/pause UI, poster sets a thumbnail image -->
       <video
         src="record.mp4"
         height="250"
@@ -63,18 +120,27 @@
         poster="wolverine.jpg"
       ></video>
     </div>
+
     <div>
+      <!-- <audio> embeds audio. controls shows the player UI, preload="auto" loads the file immediately -->
       <audio src="sample.mp3" controls preload="auto"></audio>
     </div>
+
     <h3>HTML Entities</h3>
+    <!-- HTML entities are special codes for characters that would otherwise be misread as HTML syntax -->
+    <!-- Format: starts with & and ends with ; -->
     <ul>
-      <li>&lt; for <</li>
-      <li>&gt; for ></li>
-      <li>&amp; for &</li>
-      <li>&nbsp; for a non-breaking space</li>
-      <li>&copy; for ©</li>
+      <!-- <ul> is an unordered (bulleted) list. <li> is each list item -->
+      <li>&lt; for <</li>       <!-- &lt; = less-than sign < -->
+      <li>&gt; for ></li>       <!-- &gt; = greater-than sign > -->
+      <li>&amp; for &</li>      <!-- &amp; = ampersand & -->
+      <li>&nbsp; for a non-breaking space</li>  <!-- &nbsp; = a space that won't collapse or wrap -->
+      <li>&copy; for ©</li>     <!-- &copy; = copyright symbol © -->
     </ul>
+
     <h3>Here is a multiline code</h3>
+    <!-- <pre> preserves whitespace and line breaks exactly as written (preformatted text) -->
+    <!-- <code> marks text as computer code — typically rendered in a monospace font -->
     <pre><code>
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -89,6 +155,7 @@
 &lt;/html&gt;
     </code></pre>
 
+    <!-- <script> would link a JavaScript file — commented out here since it's not needed yet -->
     <!-- <script src="script.js"></script> -->
   </body>
 </html>
