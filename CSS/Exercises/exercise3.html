@@ -1,15 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dsoothing%2Bbackground&psig=AOvVaw0HOgkJSnpdiJnrAwfixKSf&ust=1748527916750000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJCvlp2sxo0DFQAAAAAdAAAAABAE" alt="Clouds soothing image"></div>
-    <div>
-        <span>Nature</span>
-        <span>Lake</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Design</title>
+    <style>
+      /* MISTAKE 1: Don't apply background to * (everything) - it forces you to override it everywhere */
+      /* Instead, apply it only to body */
+      body {
+        background-color: rgb(193, 211, 205);
+        margin: 0;
+        padding: 20px; /* Adds breathing room around card */
+      }
+
+      .box_card {
+        background-color: white;
+        width: 500px;
+        max-width: 90%; /* IMPROVEMENT: Makes card responsive on small screens */
+        height: auto; /* IMPROVEMENT: Let content determine height instead of fixed 700px */
+        border: 2px solid black;
+        border-radius: 20px;
+        margin: 0 auto;
+        padding-bottom: 20px; /* IMPROVEMENT: Adds space at bottom */
+      }
+
+      .box_lake {
+        height: 300px;
+        border: 2px solid black;
+        margin: 10px;
+        border-radius: 20px;
+        overflow: hidden; /* IMPORTANT: Without this, image corners won't curve properly */
+      }
+
+      .box_lake img {
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        object-fit: cover; /* IMPORTANT: Prevents image from stretching/distorting */
+        display: block; /* Removes extra space below image */
+      }
+
+      /* MISTAKE 2: No need for separate .para class when all content is in box_card */
+      /* Content naturally inherits white background from parent */
+      .content {
+        margin: 15px;
+        padding: 0 10px; /* Adds left-right padding for better text spacing */
+      }
+
+      /* MISTAKE 3: Using "div span" is too broad - better to use a class */
+      .tag {
+        display: inline-block; /* IMPORTANT: Allows padding/margin to work properly on spans */
+        background-color: white;
+        border: 2px solid rgb(223, 222, 222);
+        margin: 5px; /* Reduced from 20px - too much space */
+        padding: 5px 15px; /* Left-right padding for pill shape */
+        border-radius: 100px;
+        font-size: 14px;
+      }
+
+      /* MISTAKE 4: Tags container needs left margin to align with content (I used br tag)*/
+      .tags {
+        margin-left: 15px;
+        margin-top: 15px;
+      }
+
+      /* MISTAKE 5: Don't need to set background-color on every element */
+      /* Elements inherit from parent unless you need to override */
+      h1 {
+        font-size: 24px;
+        margin: 10px 0;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.5; /* IMPROVEMENT: Makes text easier to read */
+        color: #666; /* IMPROVEMENT: Softer color than pure black */
+        margin: 10px 0;
+      }
+
+      /* MISTAKE 6: Button should be clickable - use <button> or <a> tag, not <div> */
+      /* margin: auto centering needs display: block or display: flex
+        Buttons are inline-block by default (like images or spans) */
+      .button {
+        display: block;
+        width: 120px; /* Slightly wider for "Read More" text */
+        color: #007bff; /* IMPROVEMENT: Proper blue color */
+        font-size: 15px;
+        font-weight: bold; /* Use "bold" instead of 1000 (not all fonts support 1000) */
+        font-family: Arial, Helvetica, sans-serif; /* Simpler, cleaner fonts */
+        border: none; /* IMPROVEMENT: Remove border for cleaner look */
+        margin: 20px auto; /* More top margin */
+        text-align: center;
+        padding: 12px 20px; /* Better padding */
+        border-radius: 100px;
+        background-color: #b6daf3; /* IMPROVEMENT: Softer light blue */
+        cursor: pointer; /* Shows it's clickable */
+        transition: background-color 0.3s; /* BONUS: Smooth hover effect */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box_card">
+      <!-- Image section -->
+      <div class="box_lake">
+        <img
+          src="https://img.freepik.com/free-photo/lake-surrounded-by-trees_198169-2.jpg?semt=ais_hybrid&w=740&q=80"
+          alt="Lake surrounded by mountains"
+        />
+      </div>
+
+      <!-- Tags section -->
+      <div class="tags">
+        <span class="tag">Nature</span>
+        <span class="tag">Lake</span>
+      </div>
+
+      <!-- Content section -->
+      <div class="content">
+        <h1>The Holy Trinity</h1>
+        <p>
+          The combination of IPL teams PBKS, RCB and DC were called the holy
+          trinity as they had not won a single IPL trophy. But recently RCB won
+          the title and the new team LSG has joined the holy trinity.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas
+          molestias, id fugiat iusto culpa suscipit deleniti ducimus beatae
+          doloribus vel earum maiores quos nam.
+        </p>
+      </div>
+
+      <!-- Button - IMPROVEMENT: Should use <button> or <a> tag for accessibility -->
+      <button class="button">Read More</button>
     </div>
-</body>
+  </body>
 </html>
