@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport meta tag makes the page responsive: width matches device width and zoom starts at 1x -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS media query</title>
+    <style>
+        /* Default style: red background applies on all screen sizes */
+        body {
+            background-color: red;
+        }
+
+        /* Media query: applies ONLY when the device is in portrait mode (taller than wide) */
+        @media screen and (orientation: portrait) {
+            body{
+                border: 2px solid purple;
+            }
+        }
+
+        /* Media query: applies ONLY on screens 455px wide or narrower (e.g. small phones)
+           "only screen" limits this rule to screen devices, excluding print */
+        @media only screen and (max-width: 455px){
+            body{
+                /* Override the default red background with blue on small screens */
+                background-color: blue;
+            }
+
+            .boxes{
+                /* Stack boxes vertically on small screens instead of side-by-side */
+                flex-direction: column;
+            }
+        }
+
+        /* General media query syntax for reference:
+        
+           @media not|only mediatype and (expressions) {
+               CSS-Code;
+           } */
+
+        /* Flexbox container: children (.box elements) sit side-by-side by default */
+        .boxes{
+            display: flex;
+        }
+
+        /* Each individual box: fixed 344x344px square with a steel-blue background */
+        .box{
+            width: 344px;
+            height: 344px;
+            background-color: steelblue;
+            padding: 3px;  /* space inside the border */
+            margin: 3px;   /* space outside the border, separates boxes from each other */
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Simple text div — always visible, inherits body background color -->
+    <div>
+        Hey I am a red body guy!
+    </div>
+
+    <!-- Flex container holding three equal blue boxes -->
+    <div class="boxes">
+        <!-- Three empty boxes that reflow from a row to a column on narrow screens -->
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>

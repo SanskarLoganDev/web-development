@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Variables</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      /* global variables are defined in the :root selector */
+      :root {
+        --color: rgb(255, 0, 242);
+        --seccolor: rgb(71, 216, 95);
+      }
+
+      .nav {
+        background-color: var(--color);
+      }
+
+      .container {
+        background-color: var(--seccolor);
+      }
+
+      ul {
+        display: flex;
+      }
+
+      ul li {
+        list-style: none;
+        padding: 20px;
+      }
+      /* we can also define variables in specific selectors, but they will only be accessible within that selector and its children */
+      ul li:first-child {
+        --color: rgb(0, 255, 255);
+        background-color: var(--color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    <div class="container">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et neque iure
+      excepturi illum minus voluptatum reiciendis dolore officia adipisci vel
+      molestiae quod facilis, aut eos quis mollitia ipsam magni perferendis?
+      Doloremque, ex voluptatibus atque unde voluptates numquam? Fuga qui, ut
+      earum odio exercitationem facere excepturi.
+    </div>
+  </body>
+</html>
