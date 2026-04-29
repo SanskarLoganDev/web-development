@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More on CSS Selectors</title>
+    <style>
+        /* :first-child pseudo-class — targets a .box element ONLY if it is the very first child of its parent. Here it would color only the
+           first .box red. Commented out so it has no effect right now. */
+        /* .box:first-child{
+            background-color: red;
+        } */
+
+        /* ::first-line pseudo-element — styles only the first rendered line of text inside each .box. Works like highlighting just the top line.
+           Commented out so it has no effect right now. */
+        /* .box::first-line{
+            color: yellow;
+        } */
+
+        /* Universal child selector ( * ) — selects EVERY element nested inside .boxes, no matter how deep, and turns its text blue with a border.
+           Group selector below it targets <p>, <a>, .box, AND any element with [data-color="primary"] attribute at once, giving them all top padding.
+           Both are commented out so they have no effect right now. */
+        /* .boxes *{
+            color: blue;
+            border: 2px solid black;
+        }
+
+        p, a, .box, [data-color="primary"]{
+            padding-top: 45px;
+        } */
+
+        /* :nth-child(odd) pseudo-class — targets every ODD-numbered .box child (1st, 3rd, 5th …) and gives it a blue background. */
+        /* .box:nth-child(odd){
+            background-color: blue;
+        } */
+
+        /* :nth-last-child(2) pseudo-class — counts from the END of the parent's children and targets the 2nd-to-last .box, coloring it red. */
+        /* .box:nth-last-child(2){
+            background-color: red;
+        } */
+
+        /* ::before pseudo-element — inserts generated text BEFORE the first child inside .boxes, purely through CSS (not in the HTML).
+           content sets what text appears; color makes it blue. */
+        .boxes::before {
+            content: "Harry is good";
+            color: blue;
+        }
+
+        /* ::after pseudo-element — inserts generated text AFTER the last
+           child inside .boxes, again without touching the HTML. */
+        .boxes::after {
+            content: "Sigma course is also good";
+            color: red;
+        }
+
+        /* ::selection pseudo-element — overrides the browser's default
+           highlight style. When the user drags to select text on the page,
+           the selection background turns black and the text turns aqua. */
+        ::selection {
+            background-color: black;
+            color: aqua;
+        }
+
+        /* ::first-letter pseudo-element — targets only the very first character of each .box. Makes it peru-colored (a brownish tone) and much
+           larger (45px), creating a "drop cap" effect. */
+        .box::first-letter {
+            color: peru;
+            font-size: 45px;
+        }
+
+        /* ::placeholder pseudo-element — styles the placeholder text shown inside an <input> before the user types anything.
+           Here it sets a muted grey color for the hint text. */
+        input::placeholder {
+            color: rgb(84, 84, 88);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boxes">
+        <p> before and after are generated through CSS to dynamically add text before the first .box and after the last .box without changing the HTML structure. This is purely a CSS feature that allows us to insert content without modifying our HTML markup.</p>
+        <div data-color="primary" class="box">I am first box</div>
+        <div class="box">Hey I am a box</div>
+        <div class="box">Hey I am a box</div>
+        <input type="text" placeholder="Type your name here">
+    </div>
+</body>
+
+</html>
