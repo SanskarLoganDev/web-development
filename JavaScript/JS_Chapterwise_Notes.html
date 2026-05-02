@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript — Chapter-wise Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #16161d;
+    --surface2: #1e1e28;
+    --border: #2a2a38;
+    --accent: #f7c948;
+    --accent2: #7b6ef6;
+    --accent3: #4ecdc4;
+    --text: #e8e6f0;
+    --text-muted: #7a788a;
+    --text-dim: #4a4860;
+    --code-bg: #12121a;
+    --note-bg: #1a1a10;
+    --note-border: #3a3400;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15.5px;
+  }
+
+  /* ── TOP BAR ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; gap: 16px;
+  }
+  header .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    background: var(--accent); color: #000;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 1px;
+  }
+  header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 600; color: var(--text);
+  }
+  header span.sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; color: var(--text-muted); margin-left: auto;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper { display: flex; min-height: calc(100vh - 73px); }
+
+  /* ── SIDEBAR ── */
+  nav.sidebar {
+    width: 250px; flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky; top: 73px; height: calc(100vh - 73px);
+    overflow-y: auto;
+  }
+  nav.sidebar .nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600; color: var(--text-dim);
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 0 20px 10px;
+  }
+  nav.sidebar a {
+    display: block; padding: 7px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  nav.sidebar a:hover, nav.sidebar a.active {
+    color: var(--accent); border-left-color: var(--accent);
+    background: rgba(247,201,72,0.05);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { flex: 1; padding: 48px 56px; max-width: 900px; }
+
+  /* ── CHAPTER SECTIONS ── */
+  .chapter {
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter:last-child { border-bottom: none; }
+
+  .chapter-header {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 28px;
+  }
+  .chapter-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; color: var(--accent2);
+    letter-spacing: 2px; text-transform: uppercase;
+    background: rgba(123,110,246,0.1);
+    border: 1px solid rgba(123,110,246,0.25);
+    padding: 3px 10px; border-radius: 4px; flex-shrink: 0;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px; font-weight: 700; color: var(--text);
+  }
+
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--accent3);
+    margin: 24px 0 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent3);
+  }
+  h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--text-muted);
+    margin: 16px 0 6px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+
+  /* ── CODE ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--code-bg);
+    color: var(--accent);
+    padding: 2px 7px; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 12px 0 16px;
+    overflow-x: auto;
+  }
+  pre code {
+    background: none; border: none; padding: 0;
+    font-size: 13px; color: #c8e6c9;
+    line-height: 1.6;
+  }
+  pre code .kw  { color: #cf6679; }
+  pre code .fn  { color: #82aaff; }
+  pre code .str { color: #c3e88d; }
+  pre code .cmt { color: #546e7a; font-style: italic; }
+  pre code .num { color: #f78c6c; }
+
+  /* ── NOTE / CALLOUT ── */
+  .note {
+    background: var(--note-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px; margin: 12px 0;
+    font-size: 14px; color: #ccc9a0;
+  }
+  .note strong { color: var(--accent); }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted); background: var(--surface2);
+    padding: 10px 14px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  td code { font-size: 12px; }
+  tr:hover td { background: var(--surface2); }
+
+  /* ── PRACTICE SET ── */
+  .practice {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px; margin-top: 20px;
+  }
+  .practice-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; color: var(--accent2);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .practice ol { padding-left: 20px; }
+  .practice li { margin-bottom: 6px; font-size: 14px; color: var(--text-muted); }
+
+  /* ── EXERCISE ── */
+  .exercise {
+    background: rgba(78,205,196,0.05);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 8px;
+    padding: 18px 22px; margin-top: 16px;
+  }
+  .exercise-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--accent3);
+    margin-bottom: 8px;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="badge">JS</span>
+  <h1>JavaScript — Chapter-wise Notes</h1>
+  <span class="sub">12 Chapters · Handwritten → Digital</span>
+</header>
+
+<div class="wrapper">
+
+<nav class="sidebar">
+  <div class="nav-label">Chapters</div>
+  <a href="#intro">Intro</a>
+  <a href="#ch1">Ch 1 · Variables &amp; Data</a>
+  <a href="#ch2">Ch 2 · Expressions &amp; Conditionals</a>
+  <a href="#ch3">Ch 3 · Loops &amp; Functions</a>
+  <a href="#ch4">Ch 4 · Strings</a>
+  <a href="#ch5">Ch 5 · Arrays</a>
+  <a href="#ch6">Ch 6 · JS in the Browser</a>
+  <a href="#ch7">Ch 7 · Walking the DOM</a>
+  <a href="#ch8">Ch 8 · Events &amp; DOM Properties</a>
+  <a href="#ch9">Ch 9 · Callbacks, Promises &amp; Async/Await</a>
+  <a href="#ch11">Ch 11 · OOP</a>
+  <a href="#ch12">Ch 12 · Advanced JavaScript</a>
+  <a href="#exercises">Exercises</a>
+</nav>
+
+<main>
+
+<!-- INTRO -->
+<section class="chapter" id="intro">
+  <div class="chapter-header">
+    <span class="chapter-num">Intro</span>
+    <h2>Introduction to Programming</h2>
+  </div>
+
+  <p>Programming is a way to talk to computers. A language like Hindi, English or Bengali can be used to talk to a human, but for computers we need straightforward instructions.</p>
+  <p><strong>Computer is Dumb!</strong> — It does exactly what you say, no more, no less.</p>
+  <p>Programming is the act of constructing a program — a set of precise instructions telling a computer what to do.</p>
+
+  <h3>What is ECMAScript?</h3>
+  <p>ECMAScript is a standard on which JavaScript is based. It was created to ensure that different documents on JavaScript are actually talking about the same language. JavaScript and ECMAScript can almost always be used interchangeably. JavaScript is very liberal in what it allows.</p>
+
+  <h3>How to Execute JavaScript?</h3>
+  <ul>
+    <li>JavaScript can be executed right inside one's browser — open the JavaScript console and start writing JavaScript there.</li>
+    <li>Another way is a runtime like <strong>Node.js</strong>, which can be installed and used to run JavaScript code.</li>
+    <li>Yet another way is by inserting it inside the <code>&lt;script&gt;</code> tag of an HTML document.</li>
+  </ul>
+</section>
+
+<!-- CH 1 -->
+<section class="chapter" id="ch1">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 1</span>
+    <h2>Variables &amp; Data</h2>
+  </div>
+
+  <p>Just like we follow some rules while speaking English (the grammar), we have some rules to follow while writing a JavaScript program. The set of these rules is called <strong>syntax</strong> in JavaScript.</p>
+
+  <h3>What is a Variable?</h3>
+  <p>A variable is a container that stores a value. This is very similar to the containers used to store rice, water and oats.</p>
+  <p>The value of a JavaScript variable can be changed during the execution of a program.</p>
+
+  <pre><code>var a = 7;   <span class="cmt">// literal — declaring variables</span>
+let a = 7;   <span class="cmt">// identifier + assignment operator</span></code></pre>
+
+  <h3>Rules for Choosing Variable Names</h3>
+  <ul>
+    <li>Letters, digits, underscores and <code>$</code> sign allowed.</li>
+    <li>Must begin with a <code>$</code>, <code>_</code>, or a letter.</li>
+    <li>JavaScript reserved words cannot be used as a variable name.</li>
+    <li><code>harry</code> and <code>Harry</code> are different variables (case sensitive).</li>
+  </ul>
+
+  <h3>var vs let in JavaScript</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>var</th><th>let</th><th>const</th></tr>
+      <tr><td>Scope</td><td>Globally scoped</td><td>Block scoped</td><td>Block scoped</td></tr>
+      <tr><td>Update</td><td>Can be updated &amp; re-declared</td><td>Can be updated, not re-declared</td><td>Cannot be updated or re-declared</td></tr>
+      <tr><td>Initialization</td><td>Initialized with <code>undefined</code></td><td>Not initialized</td><td>Must be initialized during declaration</td></tr>
+    </table>
+  </div>
+
+  <h3>Primitive Data Types &amp; Objects</h3>
+  <p>Primitive data types are a set of basic data types in JavaScript. Object is a non-primitive datatype.</p>
+  <p>There are <strong>7 primitive datatypes</strong> in JavaScript:</p>
+  <ul>
+    <li>Null</li><li>Undefined</li><li>Number</li><li>Boolean</li><li>String</li><li>BigInt</li><li>Symbol</li>
+  </ul>
+
+  <h3>Object</h3>
+  <p>An object in JavaScript can be created as follows:</p>
+  <pre><code>const item = {
+  name: "Led Bulb",  <span class="cmt">// key: value</span>
+  price: "150"
+};</code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 1</div>
+    <ol>
+      <li>Create a variable of type string and try to add a number to it.</li>
+      <li>Use <code>typeof</code> operator to find the datatype of the string in the last question.</li>
+      <li>Create a <code>const</code> object in JavaScript. Can you change it to hold a number later?</li>
+      <li>Try to add a new key to the const object in Problem 3. Were you able to do it?</li>
+      <li>Write a JS program to create a word-meaning dictionary of 5 words.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 2 -->
+<section class="chapter" id="ch2">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 2</span>
+    <h2>Expressions &amp; Conditionals</h2>
+  </div>
+
+  <p>A fragment of code that produces a value is called an <strong>expression</strong>. Every value written literally is an expression. For example: <code>77</code> or <code>"Harry"</code>.</p>
+
+  <h3>Operators in JavaScript</h3>
+
+  <h4>1. Arithmetic Operators</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Meaning</th></tr>
+      <tr><td><code>+</code></td><td>Addition</td></tr>
+      <tr><td><code>-</code></td><td>Subtraction</td></tr>
+      <tr><td><code>*</code></td><td>Multiplication</td></tr>
+      <tr><td><code>**</code></td><td>Exponentiation</td></tr>
+      <tr><td><code>/</code></td><td>Division</td></tr>
+      <tr><td><code>%</code></td><td>Modulus</td></tr>
+      <tr><td><code>++</code></td><td>Increment</td></tr>
+      <tr><td><code>--</code></td><td>Decrement</td></tr>
+    </table>
+  </div>
+
+  <h4>2. Assignment Operators</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Equivalent to</th></tr>
+      <tr><td><code>=</code></td><td>x = y</td></tr>
+      <tr><td><code>+=</code></td><td>x = x + y</td></tr>
+      <tr><td><code>-=</code></td><td>x = x - y</td></tr>
+      <tr><td><code>*=</code></td><td>x = x * y</td></tr>
+      <tr><td><code>/=</code></td><td>x = x / y</td></tr>
+      <tr><td><code>%=</code></td><td>x = x % y</td></tr>
+      <tr><td><code>**=</code></td><td>x = x ** y</td></tr>
+    </table>
+  </div>
+
+  <h4>3. Comparison Operators</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Meaning</th></tr>
+      <tr><td><code>==</code></td><td>Equal to</td></tr>
+      <tr><td><code>!=</code></td><td>Not equal</td></tr>
+      <tr><td><code>===</code></td><td>Equal value and type</td></tr>
+      <tr><td><code>!==</code></td><td>Not equal value or not equal type</td></tr>
+      <tr><td><code>&gt;</code></td><td>Greater than</td></tr>
+      <tr><td><code>&lt;</code></td><td>Less than</td></tr>
+      <tr><td><code>&gt;=</code></td><td>Greater than or equal to</td></tr>
+      <tr><td><code>&lt;=</code></td><td>Less than or equal to</td></tr>
+      <tr><td><code>?</code></td><td>Ternary operator</td></tr>
+    </table>
+  </div>
+
+  <h4>4. Logical Operators</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Meaning</th></tr>
+      <tr><td><code>&amp;&amp;</code></td><td>Logical AND</td></tr>
+      <tr><td><code>||</code></td><td>Logical OR</td></tr>
+      <tr><td><code>!</code></td><td>Logical NOT</td></tr>
+    </table>
+  </div>
+  <p>Apart from these, we also have <strong>type</strong> and <strong>bitwise</strong> operators. Bitwise operators perform bit by bit operations on numbers.</p>
+  <p>Example: <code>7 + 8 = 15</code> — here 7 and 8 are operands, + is the operator, 15 is the result.</p>
+
+  <h3>Comments in JavaScript</h3>
+  <p>Sometimes we want our programs to contain a text which is not executed by the JS Engine. Such a text is called a <strong>comment</strong>.</p>
+  <pre><code>let a = 2;  <span class="cmt">// this is a single line comment</span>
+
+<span class="cmt">/*
+  I am a
+  multiline comment
+*/</span>
+
+let switch = true;
+<span class="cmt">// switch = false;</span>  <span class="cmt">// Commented line won't execute</span></code></pre>
+
+  <h3>Conditional Statements</h3>
+  <p>Sometimes we might have to execute a block of code based off some condition. In JavaScript we have three forms of if...else statement:</p>
+
+  <h4>if statement</h4>
+  <pre><code>if (condition) {
+  // execute this code
+}</code></pre>
+  <p>The if statement evaluates the condition inside the <code>()</code>. If the condition is evaluated to true, the code inside the body of if is executed; else the code is not executed.</p>
+
+  <h4>if...else statement</h4>
+  <pre><code>if (condition) {
+  // block of code if condition true
+} else {
+  // block of code if condition false
+}</code></pre>
+
+  <h4>if...else if statement</h4>
+  <pre><code>if (age &gt; 0) {
+  console.log("A valid age");
+} else if (age &gt; 10 &amp;&amp; age &lt; 15) {
+  console.log("but you are a kid");
+} else if (age &gt; 18) {
+  console.log("not a kid");
+} else {
+  console.log("Invalid Age");
+}</code></pre>
+
+  <h3>JavaScript Ternary Operator</h3>
+  <p>Evaluates a condition and executes a block of code based on the condition.</p>
+  <pre><code>condition ? exp1 : exp2
+
+// Example:
+(marks &gt; 10) ? 'Yes' : 'No'
+<span class="cmt">// If marks are greater than 10, you are passed else not</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 2</div>
+    <ol>
+      <li>Use logical operators to find whether the age of a person lies between 10 and 20.</li>
+      <li>Demonstrate the use of switch case statements in JavaScript.</li>
+      <li>Write a JavaScript program to find whether a number is divisible by 2 and 3.</li>
+      <li>Write a JavaScript program to find whether a number is divisible by either 2 or 3.</li>
+      <li>Print "You can Drive" or "You cannot Drive" based on age being greater than 18 using ternary operator.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 3 -->
+<section class="chapter" id="ch3">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 3</span>
+    <h2>Loops &amp; Functions</h2>
+  </div>
+
+  <p>We use loops to perform repeated actions. For example — if you are assigned a task of printing numbers from 1 to 100, it will be very hectic to do it manually. Loops help us automate such tasks.</p>
+
+  <h3>Types of Loops in JavaScript</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Loop</th><th>Description</th></tr>
+      <tr><td><code>for</code></td><td>Loop a block of code a given number of times</td></tr>
+      <tr><td><code>for...in</code></td><td>Loops through the keys of an object</td></tr>
+      <tr><td><code>for...of</code></td><td>Loops through the values of an object</td></tr>
+      <tr><td><code>while</code></td><td>Loops a block based on a specific condition</td></tr>
+      <tr><td><code>do...while</code></td><td>While loop variant which runs at least once</td></tr>
+    </table>
+  </div>
+
+  <h4>The for loop</h4>
+  <pre><code>for (statement1; statement2; statement3) {
+  // code to be executed
+}</code></pre>
+  <ul>
+    <li>Statement 1 is executed one time (initialization).</li>
+    <li>Statement 2 is the condition based on which the loop runs (loop body is executed).</li>
+    <li>Statement 3 is executed every time the loop body is executed (update).</li>
+  </ul>
+
+  <h4>The for...in loop</h4>
+  <pre><code>for (key in object) {
+  // code to be executed
+}</code></pre>
+  <div class="note"><strong>Note:</strong> for...in loops also work with arrays which will be discussed in later videos.</div>
+
+  <h4>The for...of loop</h4>
+  <pre><code>for (variable of iterable) {
+  // code
+}
+<span class="cmt">// iterable: data structures like Arrays, Strings etc.</span></code></pre>
+
+  <h4>The while loop</h4>
+  <pre><code>while (condition) {
+  // code to be executed
+}</code></pre>
+  <div class="note"><strong>Note:</strong> If the condition never becomes false, the loop will never end and this might crash the runtime.</div>
+
+  <h4>The do...while loop</h4>
+  <pre><code>do {
+  // code to be executed  ⇒ Executed at least once
+} while (condition)</code></pre>
+
+  <h3>Functions in JavaScript</h3>
+  <p>A JavaScript function is a block of code designed to perform a particular task.</p>
+  <pre><code>function myFunc() {
+  // code
+}
+
+function binodFunc(parameter1, parameter2) {
+  // code
+  // Here the parameters behave as local variables
+}</code></pre>
+
+  <h3>Function Invocation</h3>
+  <pre><code>binodFunc(7, 8)  // Function Invocation</code></pre>
+  <p>Function invocation is a way to use the code inside the function. A function can also return a value. The value is "returned" back to the caller.</p>
+  <pre><code>const sum = (a, b) =&gt; {   <span class="cmt">// Arrow function (another way to create &amp; use function)</span>
+  let c = a + b;
+  return c;                 <span class="cmt">// Returns the sum</span>
+}
+
+let y = sum(1, 3);
+console.log(y);  <span class="cmt">// Prints 4</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 3</div>
+    <ol>
+      <li>Write a program to print the marks of a student in an object using for loop.
+        <br><code>obj = { harry: 98, rohan: 70, aakash: 73 }</code>
+      </li>
+      <li>Write the program in Q1 using for...in loop.</li>
+      <li>Write a program to print "try again" until the user enters the correct number.</li>
+      <li>Write a function to find mean of 5 numbers.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 4 -->
+<section class="chapter" id="ch4">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 4</span>
+    <h2>Strings</h2>
+  </div>
+
+  <p>Strings are used to store and manipulate text. String can be created using the following syntax:</p>
+  <pre><code>let name = "Harry"   <span class="cmt">// Creates a string</span>
+name.length          <span class="cmt">// This property prints length of the string</span>
+
+let name = 'Harry'  <span class="cmt">// Strings can also be created using single quotes</span></code></pre>
+
+  <h3>Template Literals</h3>
+  <p>Template literals use backticks instead of quotes to define a string.</p>
+  <pre><code>let name = `Harry`</code></pre>
+  <p>With template literals, it is possible to use both single as well as double quotes inside a string.</p>
+  <pre><code>let sentence = `The name "is" Harry's`
+<span class="cmt">// backtick ← ↑ double quote ← ↑ single quote</span></code></pre>
+
+  <p>We can insert variables directly in template literals. This is called <strong>string interpolation</strong>.</p>
+  <pre><code>let a = `This is ${name}`  <span class="cmt">// Prints "This is Harry" (name is a variable)</span></code></pre>
+
+  <h3>Escape Sequence Characters</h3>
+  <p>If you try to print the following string, JavaScript will misunderstand it:</p>
+  <pre><code>let name = 'Adam D'Angelo'   <span class="cmt">// Problem!</span>
+let name = 'Adam D\'Angelo'  <span class="cmt">// Solution: single quote escape sequence</span></code></pre>
+  <p>Similarly we can use <code>\"</code> inside a string with double quotes.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Sequence</th><th>Meaning</th></tr>
+      <tr><td><code>\n</code></td><td>Newline</td></tr>
+      <tr><td><code>\t</code></td><td>Tab</td></tr>
+      <tr><td><code>\r</code></td><td>Carriage Return</td></tr>
+    </table>
+  </div>
+
+  <h3>String Properties and Methods</h3>
+  <pre><code>let name = "Harry"
+name.length           <span class="cmt">// → 5</span>
+name.toUpperCase()    <span class="cmt">// → "HARRY"</span>
+name.toLowerCase()    <span class="cmt">// → "harry"</span>
+name.slice(2, 4)      <span class="cmt">// → "rr"  (from index 2 to 4, 4 not included)</span>
+name.slice(2)         <span class="cmt">// → "rry"  (from 2 to end)</span>
+
+let name = "Harry Bhai"
+let newName = name.replace("Bhai", "Bhau")
+
+let name1 = "Harry", name2 = "Naman"
+let name3 = name1.concat(name2, "Yes")  <span class="cmt">// we can even use + operator</span>
+
+let name = "   Harry   "
+let newName = name.trim()  <span class="cmt">// Removes whitespaces</span></code></pre>
+
+  <p><strong>Strings are immutable.</strong> In order to access the character at an index we use the following syntax:</p>
+  <pre><code>let name = "Harry"
+name[0]  <span class="cmt">// → H</span>
+name[1]  <span class="cmt">// → a</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 4</div>
+    <ol>
+      <li>What will the following print in JavaScript? <code>console.log("har\"".length)</code></li>
+      <li>Explore the <code>includes</code>, <code>startsWith</code> and <code>endsWith</code> functions of a string.</li>
+      <li>Write a program to convert a given string to lowercase.</li>
+      <li>Extract the amount out of this string: <code>"Please give Rs 1000"</code></li>
+      <li>Try to change the 4th character of a given string. Were you able to do it?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 5 -->
+<section class="chapter" id="ch5">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 5</span>
+    <h2>Arrays</h2>
+  </div>
+
+  <p>Arrays are variables which can hold more than one value.</p>
+  <pre><code>const fruits = ["banana", "apple", "grapes"]
+const a = [7, "Harry", false]  <span class="cmt">// Can be different types</span></code></pre>
+
+  <h3>Accessing Values</h3>
+  <pre><code>let numbers = [1, 2, 7, 9]
+numbers[0]      <span class="cmt">// → 1</span>
+numbers[1]      <span class="cmt">// → 2</span>
+numbers.length  <span class="cmt">// → 4</span></code></pre>
+
+  <h3>Changing the Values</h3>
+  <pre><code>let numbers = [7, 2, 40, 9]
+numbers[2] = 8
+<span class="cmt">// "numbers" now becomes [7, 2, 8, 9]</span>
+<span class="cmt">// Arrays are mutable — Arrays can be changed</span></code></pre>
+
+  <div class="note"><strong>Note:</strong> In JavaScript, arrays are objects. The <code>typeof</code> operator on arrays returns "object".</div>
+
+  <h3>Array Methods</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>#</th><th>Method</th><th>Description</th></tr>
+      <tr><td>1</td><td><code>toString()</code></td><td>Converts an array to a string of comma separated values</td></tr>
+      <tr><td>2</td><td><code>join()</code></td><td>Joins all array elements using a separator</td></tr>
+      <tr><td>3</td><td><code>pop()</code></td><td>Removes last element from the array; updates original array; returns the popped value</td></tr>
+      <tr><td>4</td><td><code>push()</code></td><td>Adds a new element at the end of the array; modifies original; returns new array length</td></tr>
+      <tr><td>5</td><td><code>shift()</code></td><td>Removes first element and returns it</td></tr>
+      <tr><td>6</td><td><code>unshift()</code></td><td>Adds element to the beginning; returns new array length</td></tr>
+      <tr><td>7</td><td><code>delete</code></td><td>Array elements can be deleted using the delete operator</td></tr>
+      <tr><td>8</td><td><code>concat()</code></td><td>Used to join arrays to the given array; returns a new array; does not change existing arrays</td></tr>
+      <tr><td>9</td><td><code>sort()</code></td><td>Sorts an array alphabetically; modifies the original array. Takes an optional compare function</td></tr>
+      <tr><td>10</td><td><code>splice()</code></td><td>Can be used to add new items to an array. Returns deleted items, modifies the Array. Parameters: position to add, no of elements to remove, elements to be added</td></tr>
+      <tr><td>11</td><td><code>slice()</code></td><td>Slices out a piece from an array. Creates a new array</td></tr>
+      <tr><td>12</td><td><code>reverse()</code></td><td>Reverses the elements in the source array</td></tr>
+    </table>
+  </div>
+
+  <pre><code>let n = [1, 7, 9]
+n.toString()     <span class="cmt">// → "1,7,9"</span>
+
+let n = [7, 9, 13]
+n.join("-")      <span class="cmt">// → "7-9-13"</span>
+
+const num = [1, 2, 3, 4]
+num.slice(2)     <span class="cmt">// → [3, 4]</span>
+num.slice(1, 3)  <span class="cmt">// → [2, 3]</span>
+
+const numbers = [1, 2, 3, 4, 5]
+numbers.splice(2, 1, 23, 24)
+<span class="cmt">// position=2, no_to_remove=1, elements=23,24</span></code></pre>
+
+  <h3>Looping Through Arrays</h3>
+  <pre><code><span class="cmt">// 1. forEach — calls a function once for each array element</span>
+const a = [1, 2, 3]
+a.forEach((value, index, array) =&gt; {
+  // function logic
+});
+
+<span class="cmt">// 2. map() — creates a new array by performing some operation on each element</span>
+const a = [1, 2, 3]
+a.map((value, index, array) =&gt; {
+  return value * value;
+})
+
+<span class="cmt">// 3. filter() — filters an array with values that pass a test; creates a new array</span>
+const a = [1, 2, 3, 4, 5]
+a.filter(greaterThan5)
+
+<span class="cmt">// 4. reduce — reduces an array to a single value</span>
+const n = [1, 8, 7, 11]
+let sum = numbers.reduce(add)   <span class="cmt">// A function</span>
+<span class="cmt">// 1 + 8 + 7 + 11</span>
+
+<span class="cmt">// 5. Array.from — used to create an array from any other object</span>
+Array.from("Harry")
+
+<span class="cmt">// 6. for...of — can be used to get the values from an array</span>
+<span class="cmt">// 7. for...in — can be used to get the keys from an array</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 5</div>
+    <ol>
+      <li>Create an array of numbers and take input from the user to add numbers to this array.</li>
+      <li>Keep adding numbers to the array in Q1 until 0 is added to the array.</li>
+      <li>Filter for numbers divisible by 10 from a given array.</li>
+      <li>Create an array of squares of given numbers.</li>
+      <li>Use reduce to calculate factorial of a given number from an array of first n natural numbers.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 6 -->
+<section class="chapter" id="ch6">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 6</span>
+    <h2>JavaScript in the Browser</h2>
+  </div>
+
+  <p>JavaScript was initially created to make web pages alive. JS can be written right in a web page's HTML to make it interactive.</p>
+  <p>The browser has an embedded engine called the <strong>JavaScript engine</strong> or the JavaScript runtime.</p>
+  <p>JavaScript's ability in the browser is very limited to protect the user's safety. For example, a webpage on http://google.com cannot access http://codeswear.com and steal information from there.</p>
+
+  <h3>Developer Tools</h3>
+  <p>Every browser has some developer tools which makes a developer's life a lot easier.</p>
+  <ul>
+    <li><kbd>F12</kbd> on Chrome opens Dev Tools.</li>
+    <li><strong>Elements</strong> — All HTML elements</li>
+    <li><strong>Console</strong> — All the errors + logs</li>
+    <li><strong>Network</strong> — All network requests</li>
+  </ul>
+  <p>We can also write JavaScript commands in the Console.</p>
+
+  <h3>The Script Tag</h3>
+  <p>The script tag is used to insert JavaScript into an HTML page. It can be used to insert external or internal scripts.</p>
+  <pre><code>&lt;script&gt;
+  alert("Hello")
+&lt;/script&gt;
+
+&lt;!-- or external: --&gt;
+&lt;script src="/js/thisone.js"&gt;&lt;/script&gt;</code></pre>
+  <p>The benefit of a separate JavaScript file is that the browser will download it and store it in its cache.</p>
+
+  <h3>Console Object Methods</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>assert()</code></td><td>Used to assert a condition</td></tr>
+      <tr><td><code>clear()</code></td><td>Clears the console</td></tr>
+      <tr><td><code>log()</code></td><td>Outputs a message to the console</td></tr>
+      <tr><td><code>table()</code></td><td>Displays a tabular data</td></tr>
+      <tr><td><code>warn()</code></td><td>Used for warnings</td></tr>
+      <tr><td><code>error()</code></td><td>Used for errors</td></tr>
+      <tr><td><code>info()</code></td><td>Used for special information</td></tr>
+    </table>
+  </div>
+
+  <h3>Interaction: alert, prompt and confirm</h3>
+  <ul>
+    <li><strong>alert</strong> — Used to invoke a mini window with a message. <code>alert("hello")</code></li>
+    <li><strong>prompt</strong> — Used to take user input as string. <code>inp = prompt("Hi", "No")</code> (second arg is optional default value)</li>
+    <li><strong>confirm</strong> — Shows a message and waits for the user to press OK or Cancel. Returns <code>true</code> for OK and <code>false</code> for Cancel.</li>
+  </ul>
+  <p>The exact location and look is determined by the browser which is a limitation.</p>
+
+  <h3>Window Object, BOM &amp; DOM</h3>
+  <p>We have the following when JavaScript runs in a browser:</p>
+  <pre><code>       Window
+      /  |   \
+   DOM  BOM  JavaScript Core</code></pre>
+  <p>Window object represents the browser window and provides methods to control it. It is a global object.</p>
+
+  <h3>Document Object Model (DOM)</h3>
+  <p>DOM represents the page content as HTML.</p>
+  <pre><code>document.body                         <span class="cmt">// Page body as JS object</span>
+document.body.style.background = "green"  <span class="cmt">// Changes page background to green</span></code></pre>
+
+  <h3>Browser Object Model (BOM)</h3>
+  <p>The BOM represents additional objects provided by the browser (host environment) for working with everything except the document. The functions <code>alert</code> / <code>confirm</code> / <code>prompt</code> are also a part of the BOM.</p>
+  <pre><code>location.href = "https://codewithharry.com"  <span class="cmt">// Redirect to another URL</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 6</div>
+    <ol>
+      <li>Write a program using prompt function to take input of age as a value from the user and use alert to tell him if he can drive.</li>
+      <li>In Q1, use confirm to ask the user if he wants to see the prompt again.</li>
+      <li>In the previous question, use <code>console.error</code> to log the error if the age entered is negative.</li>
+      <li>Write a program to change the url to google.com (Redirection) if user enters a number greater than 4.</li>
+      <li>Change the background of the page to yellow, red or any other color based on user input through prompt.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 7 -->
+<section class="chapter" id="ch7">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 7</span>
+    <h2>Walking the DOM</h2>
+  </div>
+
+  <p>DOM tree refers to the HTML page where all the nodes are objects. There can be 3 main types of nodes in the DOM tree:</p>
+  <ul>
+    <li>Text nodes</li>
+    <li>Element nodes</li>
+    <li>Comment nodes</li>
+  </ul>
+  <p>In an HTML page, <code>&lt;html&gt;</code> is at the root and <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> are its children, etc.</p>
+  <p>A text node is always a leaf of the tree.</p>
+
+  <h3>Auto Correction</h3>
+  <p>If an erroneous HTML is encountered by the browser, it tends to correct it. For example, if we put something after the body, it is automatically moved inside the body. Another example is <code>&lt;table&gt;</code> tag which must contain <code>&lt;tbody&gt;</code>.</p>
+
+  <h3>Walking the DOM</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Property</th><th>Returns</th></tr>
+      <tr><td><code>document.body</code></td><td>Page body tag</td></tr>
+      <tr><td><code>document.documentElement</code></td><td>Page HTML tag</td></tr>
+      <tr><td><code>document.head</code></td><td>Head element</td></tr>
+    </table>
+  </div>
+  <div class="note"><strong>Note:</strong> <code>document.body</code> can sometimes be null if the JavaScript is written before the body tag.</div>
+
+  <h3>Children of an Element</h3>
+  <p>Direct as well as deeply nested elements of an element are called its children. Child nodes are elements that are direct children.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Property</th><th>Returns</th></tr>
+      <tr><td><code>element.firstChild</code></td><td>First child element</td></tr>
+      <tr><td><code>element.lastChild</code></td><td>Last child element</td></tr>
+      <tr><td><code>element.childNodes</code></td><td>All child nodes</td></tr>
+    </table>
+  </div>
+  <pre><code>elem.childNodes[0] === elem.firstChild
+elem.childNodes[elem.childNodes.length - 1] === elem.lastChild</code></pre>
+  <p>There is also a method <code>elem.hasChildNodes()</code> to check whether there are any child nodes.</p>
+  <div class="note"><strong>Note:</strong> childNodes looks like an array but it's actually a Collection. We can use <code>Array.from(collection)</code> to convert it into an Array — Array methods won't work directly on collections.
+    <br><br>DOM collections are: Read-only · Live (auto-updates) · Iterable using <code>for...of</code> loop.</div>
+
+  <h3>Siblings and the Parent</h3>
+  <p>Siblings are nodes that are children of the same parent. For example: <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> are siblings. Their parent is <code>&lt;html&gt;</code>.</p>
+  <ul>
+    <li><code>&lt;body&gt;</code> is said to be the "next" or "right" sibling of <code>&lt;head&gt;</code>.</li>
+    <li><code>&lt;head&gt;</code> is said to be the "previous" or "left" sibling of <code>&lt;body&gt;</code>.</li>
+    <li>The next sibling is in <code>nextSibling</code> property, the previous one is in <code>previousSibling</code>.</li>
+    <li>The parent is available as <code>parentNode</code>.</li>
+  </ul>
+
+  <h3>Element Only Navigation</h3>
+  <p>Sometimes we don't want text or comment nodes. Some links only take Element nodes into account.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Property</th><th>Returns</th></tr>
+      <tr><td><code>document.previousElementSibling</code></td><td>Previous sibling which is an Element</td></tr>
+      <tr><td><code>document.nextElementSibling</code></td><td>Next sibling (Element)</td></tr>
+      <tr><td><code>document.firstElementChild</code></td><td>First Element child</td></tr>
+      <tr><td><code>document.lastElementChild</code></td><td>Last Element child</td></tr>
+    </table>
+  </div>
+
+  <h3>Table Links</h3>
+  <p>Certain DOM elements may provide additional properties specific to their type for convenience. Table element supports the following properties:</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Property</th><th>Description</th></tr>
+      <tr><td><code>table.rows</code></td><td>Collection of tr elements</td></tr>
+      <tr><td><code>table.caption</code></td><td>Reference to <code>&lt;caption&gt;</code></td></tr>
+      <tr><td><code>table.tHead</code></td><td>Reference to <code>&lt;thead&gt;</code></td></tr>
+      <tr><td><code>table.tFoot</code></td><td>Reference to <code>&lt;tfoot&gt;</code></td></tr>
+      <tr><td><code>table.tBodies</code></td><td>Collection of <code>&lt;tbody&gt;</code> elements</td></tr>
+      <tr><td><code>tbody.rows</code></td><td>Collection of <code>&lt;tr&gt;</code> inside</td></tr>
+      <tr><td><code>tr.cells</code></td><td>Collection of td and th</td></tr>
+      <tr><td><code>tr.sectionRowIndex</code></td><td>Index of tr inside enclosing element</td></tr>
+      <tr><td><code>tr.rowIndex</code></td><td>Row number starting from 0</td></tr>
+      <tr><td><code>td.cellIndex</code></td><td>No of cells inside enclosing <code>&lt;tr&gt;</code></td></tr>
+    </table>
+  </div>
+
+  <h3>Searching the DOM</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>document.getElementById</code></td><td>Get element with a given "id" attribute</td></tr>
+      <tr><td><code>document.querySelectorAll</code></td><td>Returns all elements matching the given CSS selector</td></tr>
+      <tr><td><code>document.querySelector</code></td><td>Returns the first element for the given CSS selector; efficient version of <code>querySelectorAll(css)[0]</code></td></tr>
+      <tr><td><code>document.getElementsByTagName</code></td><td>Returns elements with the given tag name</td></tr>
+      <tr><td><code>document.getElementsByClassName</code></td><td>Returns elements that have the given CSS class (don't forget the "s" letter)</td></tr>
+      <tr><td><code>document.getElementsByName</code></td><td>Searches elements by the name attribute</td></tr>
+    </table>
+  </div>
+
+  <h3>matches, closest &amp; contains methods</h3>
+  <ul>
+    <li><code>elem.matches(css)</code> — To check if element matches the given CSS selector.</li>
+    <li><code>elem.closest(css)</code> — To look for the nearest ancestor that matches the given CSS selector. The elem itself is also checked.</li>
+    <li><code>elemA.contains(elemB)</code> — Returns true if elemB is inside elemA (a descendant of elemA) or when elemA === elemB.</li>
+  </ul>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 7</div>
+    <ol>
+      <li>Create a navbar and change the color of its first element to red.</li>
+      <li>Create a table without tbody. Now use "View page source" button to check whether it has a tbody or not.</li>
+      <li>Create an element with 3 children. Now change the color of first and last element to green.</li>
+      <li>Write a JavaScript code to change background of all &lt;li&gt; tags to cyan.</li>
+      <li>Which of the following is used to look for the farthest ancestor that matches a given CSS selector? (a) matches (b) closest (c) contains (d) none of these</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 8 -->
+<section class="chapter" id="ch8">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 8</span>
+    <h2>Events &amp; Other DOM Properties</h2>
+  </div>
+
+  <h3>console.dir function</h3>
+  <ul>
+    <li><code>console.log</code> shows the element DOM tree.</li>
+    <li><code>console.dir</code> shows the element as an object with its properties.</li>
+  </ul>
+
+  <h3>tagName / nodeName</h3>
+  <p>Used to read tag name of an element.</p>
+  <ul>
+    <li><code>tagName</code> — Only exists for Element nodes.</li>
+    <li><code>nodeName</code> — Defined for any node (text, comment, etc.)</li>
+  </ul>
+
+  <h3>innerHTML and outerHTML</h3>
+  <ul>
+    <li>The <code>innerHTML</code> property allows to get the HTML inside the element as a string. Valid for element nodes only.</li>
+    <li>The <code>outerHTML</code> property contains the full HTML — innerHTML + the element itself.</li>
+    <li><code>innerHTML</code> is valid only for element nodes. For other node types we can use <code>nodeValue</code> or <code>data</code>.</li>
+  </ul>
+
+  <h3>textContent</h3>
+  <p>Provides access to the text inside the element: only text, minus all tags.</p>
+
+  <h3>The hidden Property</h3>
+  <p>The "hidden" attribute and the DOM property specifies whether the element is visible or not.</p>
+  <pre><code>&lt;div hidden&gt; I am hidden &lt;/div&gt;
+&lt;div id="element"&gt; I can be hidden &lt;/div&gt;
+
+&lt;script&gt;
+  element.hidden = true;
+&lt;/script&gt;</code></pre>
+
+  <h3>Attribute Methods</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>elem.hasAttribute(name)</code></td><td>Method to check for existence of an attribute</td></tr>
+      <tr><td><code>elem.getAttribute(name)</code></td><td>Method used to get the value of an attribute</td></tr>
+      <tr><td><code>elem.setAttribute(name, value)</code></td><td>Method used to set the value of an attribute</td></tr>
+      <tr><td><code>elem.removeAttribute(name)</code></td><td>Method to remove the attribute from elem</td></tr>
+      <tr><td><code>elem.attributes</code></td><td>Method to get the collection of all attributes</td></tr>
+    </table>
+  </div>
+
+  <h3>data-* Attributes</h3>
+  <p>We can always create custom attributes but the ones starting with "data-" are reserved for programmers' use. They are available in a property named <code>dataset</code>. If an element has an attribute named "data-one", it's available as <code>element.dataset.one</code>.</p>
+
+  <h3>Insertion Methods</h3>
+  <pre><code>let div = document.createElement('div')  // create
+div.className = "alert"                   // set class
+div.innerHTML = "&lt;span&gt;hello&lt;/span&gt;"
+document.body.append(div)</code></pre>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>node.append(e)</code></td><td>Append at the end of node</td></tr>
+      <tr><td><code>node.prepend(e)</code></td><td>Insert at the beginning of node</td></tr>
+      <tr><td><code>node.before(e)</code></td><td>Insert before node</td></tr>
+      <tr><td><code>node.after(e)</code></td><td>Insert after node</td></tr>
+      <tr><td><code>node.replaceWith(e)</code></td><td>Replaces node with the given node</td></tr>
+    </table>
+  </div>
+
+  <h3>insertAdjacentHTML / Text / Element</h3>
+  <p>This method is used to insert HTML. The first parameter is a code word specifying where to insert. Must be one of the following:</p>
+  <ul>
+    <li><strong>"beforebegin"</strong> — Insert HTML immediately before element</li>
+    <li><strong>"afterbegin"</strong> — Insert HTML into element at the beginning</li>
+    <li><strong>"beforeend"</strong> — Insert HTML into element at the end</li>
+    <li><strong>"afterend"</strong> — Insert HTML immediately after element</li>
+  </ul>
+  <pre><code>&lt;div id="div"&gt; &lt;/div&gt;
+&lt;script&gt;
+  div.insertAdjacentHTML('beforebegin', '&lt;p&gt; Hello &lt;/p&gt;');
+  div.insertAdjacentHTML('afterend', '&lt;p&gt; Bye &lt;/p&gt;');
+&lt;/script&gt;</code></pre>
+
+  <h3>Node Removal</h3>
+  <pre><code>let id1 = document.getElementById("id1")
+id1.remove()</code></pre>
+
+  <h3>ClassName and classList</h3>
+  <p>If we assign something to <code>elem.className</code>, it replaces the whole string of classes. Often we want to add/remove/toggle a single class.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>elem.classList.add/remove("class")</code></td><td>Adds / removes a class</td></tr>
+      <tr><td><code>elem.classList.toggle("class")</code></td><td>Adds the class if it doesn't exist, otherwise removes it</td></tr>
+      <tr><td><code>elem.classList.contains("class")</code></td><td>Checks for the given class, returns true/false</td></tr>
+    </table>
+  </div>
+
+  <h3>SetTimeout and SetInterval</h3>
+  <p><code>setTimeout</code> allows us to run a function once after the interval of time.</p>
+  <pre><code>let timerId = setTimeout(function, &lt;delay&gt;, &lt;arg1&gt;, &lt;arg2&gt;)
+<span class="cmt">// delay is in ms, returns a timerId</span>
+
+let timerId = setTimeout(() =&gt; alert("never"), 1000);
+clearTimeout(timerId);  <span class="cmt">// Cancel the execution</span></code></pre>
+
+  <p><code>setInterval</code> has a similar syntax as setTimeout, but unlike setTimeout, it runs the function not only once but regularly after the given interval of time. To stop further calls, we can use <code>clearInterval(timerId)</code>.</p>
+  <pre><code>let timerId = setInterval(function, &lt;delay&gt;, &lt;arg1&gt;, ...)</code></pre>
+
+  <h3>Browser Events</h3>
+  <p>An event is a signal that something has happened. All the DOM nodes generate such signals.</p>
+  <ul>
+    <li><strong>Mouse events:</strong> click, contextmenu (right click), mouseover/mouseout, mousedown/mouseup, mousemove</li>
+    <li><strong>Keyboard events:</strong> keydown, keyup</li>
+    <li><strong>Form element events:</strong> submit, focus, etc.</li>
+    <li><strong>Document events:</strong> DOMContentLoaded</li>
+  </ul>
+
+  <h3>Handling Events</h3>
+  <pre><code><span class="cmt">// 1. Through HTML attribute</span>
+&lt;input value="Hey" onclick="alert('hey')" type="button"&gt;
+
+<span class="cmt">// 2. Through onclick property</span>
+elem.onclick = function() {
+  alert("yes")
+};
+
+<span class="cmt">// Note: Adding a handler with JavaScript overwrites the existing handler</span></code></pre>
+
+  <h3>addEventListener and removeEventListener</h3>
+  <p><code>addEventListener</code> is used to assign multiple handlers to an event.</p>
+  <pre><code>element.addEventListener(event, handler)
+element.removeEventListener(event, handler)
+<span class="cmt">// handler must be the same function object for this to work</span></code></pre>
+
+  <h3>The Event Object</h3>
+  <p>When an event happens, the browser creates an event object, puts details into it, and passes it as an argument to the handler.</p>
+  <pre><code>elem.onclick = function(event) {
+  // ...
+}
+// event.type       : Event type
+// event.currentTarget : Element that handled the event
+// event.clientX / event.clientY : Coordinates of the cursor</code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 8</div>
+    <ol>
+      <li>Write a program to show different alerts when different buttons are clicked.</li>
+      <li>Create a website which is capable of storing bookmarks of your favorite websites using href.</li>
+      <li>Repeat Q2 using event listeners.</li>
+      <li>Write a JavaScript program to keep fetching contents of a website every 5 seconds.</li>
+      <li>Create a glowing bulb effect using classList toggle method in JavaScript.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 9 -->
+<section class="chapter" id="ch9">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 9</span>
+    <h2>Callbacks, Promises &amp; Async/Await</h2>
+  </div>
+
+  <ul>
+    <li><strong>Asynchronous actions</strong> are the actions that we initiate now and they finish later. e.g. <code>setTimeout</code>.</li>
+    <li><strong>Synchronous actions</strong> are the actions that initiate and finish one by one.</li>
+  </ul>
+
+  <h3>Callback Functions</h3>
+  <p>A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete an action.</p>
+  <pre><code>function loadScript(src, callback) {
+  let script = document.createElement('script')
+  script.src = src
+  script.onload = () =&gt; callback(script)
+  document.head.append(script)
+}
+
+loadScript('https://cdn.harry.com', (script) =&gt; {
+  alert('script is loaded')
+  alert(script.src)
+});</code></pre>
+
+  <p>This is called "callback-based" style of async programming. A function that does something asynchronously should provide a callback argument where we put the function to run after its complete.</p>
+
+  <h3>Handling Errors</h3>
+  <pre><code>function loadScript(src, callback) {
+  // ...
+  script.onload = () =&gt; callback(null, script);
+  script.onerror = () =&gt; callback(new Error('failed'));
+}
+
+loadScript('cdn/harry', function(error, script) {
+  if (error) {
+    // handle error
+  } else {
+    // script loaded
+  }
+});</code></pre>
+
+  <h3>Pyramid of Doom (Callback Hell)</h3>
+  <p>When we have callback inside callbacks, the code gets difficult to manage. As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of <code>...</code>. This is sometimes called "callback hell" or "pyramid of doom". This way of coding isn't very good!</p>
+
+  <h3>Promises</h3>
+  <p>The solution to the callback hell is promises. A promise is a "promise of code execution". The code either executes or fails, in both the cases the subscriber will be notified.</p>
+  <pre><code>let promise = new Promise(function(resolve, reject) {
+  // executor (predefined in JS engine)
+});
+// resolve(value) → If the job is finished successfully
+// reject(error)  → If the job fails</code></pre>
+
+  <p>The promise object returned by the new Promise constructor has these properties:</p>
+  <ul>
+    <li><strong>state:</strong> Initially "pending", then changes to either "fulfilled" when resolve is called or "rejected" when reject is called.</li>
+    <li><strong>result:</strong> Initially undefined, then changes to value if resolved or error when rejected.</li>
+  </ul>
+
+  <h3>Consumers: .then &amp; .catch</h3>
+  <pre><code>promise.then(
+  function(result) { /* handle result */ },
+  function(error)  { /* handle error  */ }
+);
+
+promise.catch(alert)   <span class="cmt">// Only errors</span>
+
+promise.finally(() =&gt; {})  <span class="cmt">// Used to perform general cleanups; runs in all cases</span></code></pre>
+
+  <h3>Promises Chaining</h3>
+  <p>We can chain promises and make them pass the resolved values to one another. Every call to <code>.then()</code> returns a new promise whose value is passed to the next one.</p>
+  <pre><code>p.then(function(result) =&gt; {
+  alert(result); return 2;
+}).then
+// ...and so on</code></pre>
+  <p>We can also attach multiple handlers to one promise. They don't pass the result to each other; instead they process it independently.</p>
+
+  <h3>Promise API (6 static methods)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>Promise.all(promises)</code></td><td>Waits for all promises to resolve and returns the array of their results. If any one fails, it becomes the error and all other results are ignored.</td></tr>
+      <tr><td><code>Promise.allSettled(promises)</code></td><td>Waits for all the promises to settle and returns their results as an array of objects with status and value.</td></tr>
+      <tr><td><code>Promise.race(promises)</code></td><td>Waits for the first promise to settle and its result/error becomes the outcome.</td></tr>
+      <tr><td><code>Promise.any(promises)</code></td><td>Waits for the first promise to fulfill (not rejected) and its result becomes the outcome. Throws AggregateError if all are rejected.</td></tr>
+      <tr><td><code>Promise.resolve(value)</code></td><td>Makes a resolved promise with the given value.</td></tr>
+      <tr><td><code>Promise.reject(error)</code></td><td>Makes a rejected promise with the given error.</td></tr>
+    </table>
+  </div>
+
+  <h3>Async/Await</h3>
+  <p>There is a special syntax to work with promises in JavaScript in a more elegant way. A function can be made async by using the <code>async</code> keyword.</p>
+  <pre><code>async function harry() {
+  return 7;
+}</code></pre>
+  <p>An async function always returns a promise. Other values are wrapped in a promise automatically. So async ensures that the function returns a promise and wraps non-promises in it.</p>
+
+  <h4>The await keyword</h4>
+  <p>There is another keyword called <code>await</code> that works only inside async functions.</p>
+  <pre><code>let value = await promise;</code></pre>
+  <p>The await keyword makes JavaScript wait until the promise settles and returns its value. It is just a more elegant syntax of getting the promise result than <code>promise.then</code> — and it's easier to read and write.</p>
+
+  <h3>Error Handling</h3>
+  <p>We all make mistakes. Also sometimes our script can have errors. Usually a program halts when an error occurs. The try...catch syntax allows us to catch errors so that the script instead of dying can do something more reasonable.</p>
+  <pre><code>try {
+  // try the code
+} catch (err) {    // err variable contains an error object
+  // error handling
+}
+<span class="cmt">// 1. First the code in try is executed</span>
+<span class="cmt">// 2. If there is no error, catch is ignored; else catch is executed</span></code></pre>
+
+  <div class="note"><strong>try...catch works synchronously.</strong> If an exception happens in scheduled code, like in setTimeout, then try...catch won't catch it because the function itself is executed later, when the engine has already left the try...catch construct.</div>
+
+  <h4>The Error Object</h4>
+  <p>For all built-in errors, the error object has two main properties:</p>
+  <pre><code>catch(err) {
+  alert(err.name)     // Error name
+  alert(err.message)  // Error message
+  alert(err.stack)    // Stack trace
+}</code></pre>
+
+  <h4>Throwing Custom Error</h4>
+  <pre><code>if (age &gt; 180) {
+  throw new Error("Invalid Age")
+}
+// For standard errors:
+let error = new SyntaxError(message)
+// or
+new ReferenceError(message)</code></pre>
+
+  <h4>The finally Clause</h4>
+  <p>The try...catch construct may have one more code clause: finally. If it exists it runs in all cases:</p>
+  <ul>
+    <li>After try if there were no errors.</li>
+    <li>After catch if there were errors.</li>
+  </ul>
+  <p>If there is a return in try, finally is executed just before the control returns to the outer code.</p>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 9</div>
+    <ol>
+      <li>Write a program to load a JavaScript file in a browser using Promises. Use <code>.then()</code> to display an alert when the load is complete.</li>
+      <li>Write the same program from previous question and use async/await syntax.</li>
+      <li>Create a promise which rejects after 3 seconds. Use async/await to get its value. Use a try catch to handle its error.</li>
+      <li>Write a program using <code>Promise.all()</code> inside an async/await to await 3 promises. Compare its results with the case where we await these promises one by one.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 11 -->
+<section class="chapter" id="ch11">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 11</span>
+    <h2>Object Oriented Programming (OOP)</h2>
+  </div>
+
+  <p>In programming we often take something and then extend it. For example we might want to create a user object and "Admin" and "Guest" will be slightly modified variants of it.</p>
+
+  <h3>[[Prototype]]</h3>
+  <p>JavaScript objects have a special property called <code>prototype</code> that is either null or references another object.</p>
+  <p>When we try to read a property from a prototype and it's missing, JavaScript automatically takes it from the prototype. This is called <strong>"prototypal inheritance"</strong>.</p>
+
+  <h3>Setting Prototype</h3>
+  <p>We can set prototype by setting <code>__proto__</code>. Now if we read a property from the object which is not in the object and is present in the prototype, JavaScript will take it from the prototype. If we have a method in object, it will be called from the object. If it's missing in object and present in prototype, it's called from the prototype.</p>
+
+  <h3>Classes and Objects</h3>
+  <p>In object-oriented programming, a class is an extensible program-code template for creating objects, providing initial values for state (member variables) and implementation of behavior (member functions).</p>
+  <pre><code>class MyClass {
+  // class methods
+  constructor() { ... }
+  method1() { ... }
+  method2() { ... }
+}</code></pre>
+  <p>We can then use <code>new MyClass()</code> to create a new object with all the listed methods. The <code>constructor()</code> method is called automatically by <code>new</code>, so we can initialize the object there.</p>
+
+  <h3>Class Inheritance</h3>
+  <p>Class Inheritance is a way for one class to extend another class. This is done by using the <code>extends</code> keyword.</p>
+  <pre><code>class Child extends Parent
+
+class Monkey extends Animal {
+  hide() {
+    alert(`${this.name} hides!`);
+  }
+}
+
+let monkey = new Monkey("Monu")
+monkey.run(7);   // from Animal
+monkey.hide();</code></pre>
+
+  <h3>Method Overriding</h3>
+  <p>If we create our own implementation of run, it will not be taken from the Animal class. This is called Method Overriding.</p>
+
+  <h3>super Keyword</h3>
+  <p>When we override a method, we don't want the method of the previous class to go in vain. We can execute it using <code>super</code> keyword.</p>
+  <pre><code>run() {
+  super.run()   // calls parent run
+  this.hide()
+}
+super(a, b)   // calls parent constructor</code></pre>
+
+  <h3>Overriding Constructor</h3>
+  <p>According to the specification, if a class extends another class and has no constructor, then the following empty constructor is generated:</p>
+  <pre><code>class Monkey extends Animal {
+  // auto generated
+  constructor(...args) {
+    super(...args);
+  }
+}</code></pre>
+  <div class="note"><strong>Constructors in inheriting classes must call super(...) and do it before using <code>this</code>.</strong></div>
+
+  <h3>Static Method</h3>
+  <p>Static methods are used to implement functions that belong to a class as a whole and not to any particular object. Static methods aren't available for individual objects.</p>
+  <pre><code>class Employee {
+  static sMethod() {
+    alert("Hey");
+  }
+}
+Employee.sMethod()</code></pre>
+
+  <h3>Getters and Setters</h3>
+  <p>Classes may include getters and setters to get and set the computed properties.</p>
+  <pre><code>class Person {
+  // ...
+  get name() {
+    return this._name;
+  }
+  set name(newName) {
+    this._name = newName;
+  }
+}</code></pre>
+  <p>The name property is changed to <code>_name</code> to avoid the name collision with the getter &amp; setter. Then the getter uses the get keyword as shown above.</p>
+
+  <h3>instanceof Operator</h3>
+  <p>The instanceof operator allows to check whether an object belongs to a certain class.</p>
+  <pre><code>&lt;obj&gt; instanceof &lt;class&gt;
+<span class="cmt">// Returns true if obj belongs to the Class or any other class inheriting from it</span></code></pre>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 11</div>
+    <ol>
+      <li>Create a JavaScript class to create a complex number. Create a constructor to set the real and the complex part.</li>
+      <li>Write a method to add two complex numbers in the above class.</li>
+      <li>Create a class Student from a class Human. Override a method &amp; see changes.</li>
+      <li>See if Student is an instance of Human using instanceOf keyword.</li>
+      <li>Use getters &amp; setters to set and get the real and imaginary parts of the complex number.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- CH 12 -->
+<section class="chapter" id="ch12">
+  <div class="chapter-header">
+    <span class="chapter-num">Chapter 12</span>
+    <h2>Advanced JavaScript</h2>
+  </div>
+
+  <p>There are some JavaScript concepts which make the life of a developer extremely simple.</p>
+
+  <h3>IIFE (Immediately Invoked Function Expression)</h3>
+  <p>IIFE is a JavaScript function that runs as soon as it is defined.</p>
+  <pre><code>(function() {
+  // ...
+  // ...
+})();   // IIFE Syntax</code></pre>
+  <p>It is used to avoid polluting the global namespace, execute an async-await, etc.</p>
+
+  <h3>Destructuring</h3>
+  <p>Destructuring assignment is used to unpack values from an Array, or properties from objects, into distinct variables.</p>
+  <pre><code><span class="cmt">// Array destructuring:</span>
+let [x, y] = [7, 20]
+<span class="cmt">// x will be assigned 7 and y, 20</span>
+
+let [10, x, ...rest] = [10, 80, 7, 11, 21, 88]
+<span class="cmt">// x will be 80, rest will be [7, 11, 21, 88]</span>
+
+<span class="cmt">// Object destructuring:</span>
+const obj = {a: 1, b: 2}
+const {a, b} = obj</code></pre>
+
+  <h3>Spread Syntax</h3>
+  <p>Spread syntax allows an iterable such as an array or string to be expanded in places where zero or more arguments are expected. In an object literal, the spread syntax enumerates the properties of an object and adds the key-value pairs to the object being created.</p>
+  <pre><code>const arr = [1, 7, 11]
+const obj = {...arr};   // {0: 1, 1: 7, 2: 11}
+
+const nums = [1, 2, 7]
+Console.log(Sum(...nums))  // 10</code></pre>
+
+  <h3>Local, Global &amp; Block Scopes</h3>
+  <p>JavaScript has three types of scopes:</p>
+  <ul>
+    <li><strong>Block Scope</strong> — <code>let</code> and <code>const</code> provide block level scope; variables declared inside a <code>{ }</code> cannot be accessed from outside the block.</li>
+    <li><strong>Function Scope</strong> — Variables declared within a JavaScript function become local to the function.</li>
+    <li><strong>Global Scope</strong> — A variable declared outside a function becomes global.</li>
+  </ul>
+
+  <h3>Hoisting</h3>
+  <p>Hoisting refers to the process whereby the interpreter appears to move the declarations to the top of the code before execution. Variables can thus be referenced before they are declared in JavaScript.</p>
+  <div class="note"><strong>Important Note:</strong> JavaScript only hoists declarations, not initializations. The variable will be undefined until the line where its initialized is reached. With <code>let</code> and <code>const</code>, accessing before declaration gives an Error; with <code>var</code>, undefined is printed. Function expressions and class expressions are not hoisted.</div>
+
+  <div class="practice">
+    <div class="practice-title">Practice Set — Chapter 12</div>
+    <ol>
+      <li>Write a JavaScript program to print the following after 2 second delay: Hello, World.</li>
+      <li>Write a JavaScript program to find average of numbers in an array using Spread Syntax.</li>
+      <li>Write a JavaScript function which resolves a Promise after n seconds. The function takes n as the parameter. Use an IIFE to execute the functions with different values of n.</li>
+      <li>Write a simple interest calculator using JavaScript.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- EXERCISES -->
+<section class="chapter" id="exercises">
+  <div class="chapter-header">
+    <span class="chapter-num">Exercises</span>
+    <h2>Major Exercises</h2>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 1 — Guess the Number</div>
+    <p>Write a JavaScript program to generate a random number and store it in a variable. The program then takes an input from the user to tell them whether the guess was correct, greater or lesser than the original number. Score = <code>100 - (no. of guesses)</code>. The program is expected to terminate once the number is guessed. Number should be between 1–100.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 2 — Snake Water Gun</div>
+    <p>Use JavaScript to create a game of Snake Water &amp; Gun. The game should ask you to enter S, W or G. The computer should be able to randomly generate S, W or G and declare Win or Loss using alert. Use confirm and prompt wherever required.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 3 — Tell me a Joke</div>
+    <p><code>elem.innerHTML</code> is used to populate a div with HTML. Search online about this method and create a website with a div tag containing a random joke given an array of jokes. Use <code>Math.random</code> and fetch jokes from the internet (use any website to create the array). Your website should show a random joke on every reload. Min length of your jokes array should be 10.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 4 — Digital Clock</div>
+    <p>Create a Digital Seconds clock using <code>setInterval</code> and Date object in JavaScript. The Date object can be used to get the date, time, hours and seconds which can then be updated using <code>setInterval</code>. Try to keep the UI good looking.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 5 — Hackerman</div>
+    <p>Write a JavaScript program to pretend to look like a hacker. Write an async function which will simply display the following output with delays: "Initializing Hack program...", "Hacking Ashish's username...", "Username found aashish17...", "Connecting to facebook...". Try to use HTML &amp; styling if possible.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 6 — TODO List</div>
+    <p>Create a TODO List app capable of storing your TODOs in local Storage. Add an option to create, delete and access all the TODOs. Try to make UI as good as possible.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 7 — Password Generator</div>
+    <p>Create a JavaScript program capable of generating a password which contains at least one lowercase, one uppercase and one special characters. Create a Password class to achieve the same.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-title">Exercise 8 — Alarm Clock</div>
+    <p>The HTML Audio Element Interface can be used to play audio in the browser. Create an alarm clock which displays time and plays sound at a user specified time.</p>
+  </div>
+
+</section>
+
+</main>
+</div>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.sidebar a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
