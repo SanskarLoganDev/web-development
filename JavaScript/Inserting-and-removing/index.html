@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container red bg-green">
+        <!-- data-* attributes: custom attributes for storing extra info on elements; accessible via JS with elem.dataset.createdby -->
+        <div class="box" style="display: flex;" data-createdby="harry" data-conceptby="rohan" >Hey I am a box</div>
+        <div class="box">Hey I am a box</div>
+        <script>
+            // createElement — creates a new <div> element in memory (not yet in the DOM)
+            let div = document.createElement("div");
+
+            // innerHTML — sets the inner HTML of the new element, including tags like <b>
+            div.innerHTML = "I have been inserted <b>by harry</b>"
+
+            // setAttribute — adds/sets the "class" attribute on the element to "created"
+            div.setAttribute("class", "created");
+
+            // before() — inserts the new div immediately before the .container element in the DOM
+            document.querySelector(".container").before(div);
+
+            let cont = document.querySelector(".container")
+
+            // insertAdjacentHTML — inserts raw HTML at a position relative to the element
+            // "beforebegin" places the HTML just before the element's opening tag (outside of it)
+            // other positions: "afterbegin" (inside, before first child), "beforeend" (inside, after last child), "afterend" (after closing tag)
+            cont.insertAdjacentHTML("beforebegin", "<b> I am under the water. Please h elp me here too much raining.... iuuuuooooo</b>")
+        </script>
+    </div>
+</body>
+
+</html>
