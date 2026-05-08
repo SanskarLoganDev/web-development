@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling</title>
+
+
+    <style>
+        /* we are addin style so that we can see click events for different containers and children */
+        .child{
+            background-color: lightblue;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+            cursor: pointer;
+            height: 50vh;
+            font-size: 40px;
+        }
+        .childContainer{
+            background-color: yellow;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container{
+            background-color: pink;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+
+
+  </head>
+  <body>
+    <div class="container">
+      <section class="childContainer">
+        <div class="child">I am a Child</div>
+      </section>
+    </div>
+
+
+    <script>
+      document.querySelector(".child").addEventListener("contextmenu", (e) => {
+        e.stopPropagation(); // will stop bubbling
+        alert("Child was clicked");
+      });
+      document.querySelector(".childContainer").addEventListener("contextmenu", (e) => {
+        e.stopPropagation();
+        alert("Child container was clicked");
+      });
+      document.querySelector(".container").addEventListener("contextmenu", (e) => {
+        alert("Container was clicked");
+      });
+      
+      // element.removeEventListener(event, handler) can be used to remove the above events listeners
+       
+      // Generates a random RGB color string each time it is called.
+      // Used below to give the .childContainer a new background color on every interval tick.
+      function getRandomColor() {
+            // Math.random() returns a decimal between 0 (inclusive) and 1 (exclusive).
+            // Multiplying by 255 scales it to the valid RGB range (0–255).
+            // Math.ceil() rounds the value UP to the next whole number so we get an integer.
+            let val1 = Math.ceil(0 + Math.random() * 255); // red channel   (0–255)
+            let val2 = Math.ceil(0 + Math.random() * 255); // green channel (0–255)
+            let val3 = Math.ceil(0 + Math.random() * 255); // blue channel  (0–255)
+
+            // Template literal (backticks ``) lets us embed variables directly into the string
+            // using ${...}. Returns a CSS-ready color value, e.g. "rgb(42, 200, 17)".
+            return `rgb(${val1}, ${val2}, ${val3})`
+        }
+
+        // ---------- setInterval ----------
+        // setInterval(callback, delay) repeatedly runs `callback` every `delay` milliseconds until it is cancelled with clearInterval(id). 
+        // It returns a numeric interval ID (stored here in `a`) which is what you'd pass to clearInterval to stop it.
+        // Below, every 1000 ms (1 second) it picks a new random color and applies it
+        // to the .childContainer's background — so the box keeps changing color forever.
+
+        
+        /* let a = setInterval(() => {
+             document.querySelector(".childContainer").style.background = getRandomColor();
+         }, 1000); // changes every 1 sec
+
+         console.log(a) */
+
+        // ---------- setTimeout ----------
+        // setTimeout(callback, delay) runs `callback` ONCE, after waiting `delay` milliseconds.
+        // Unlike setInterval it does not repeat. It also returns a numeric timeout ID
+        // (stored in `a`) which can be passed to clearTimeout(a) to cancel it before it fires.
+        // Here: after 5000 ms (5 seconds) the .childContainer's background is set to a
+        // single random color — and that's it, no further changes happen.
+
+
+        let a = setTimeout(() => {
+            document.querySelector(".childContainer").style.background = getRandomColor();
+        }, 5000);
+
+        // Logs the timeout ID (just a number) to the console — useful if you want to
+        // verify the timer was created or to later cancel it via clearTimeout(a).
+        console.log(a)
+
+
+    </script>
+  </body>
+</html>
