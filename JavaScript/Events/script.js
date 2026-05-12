@@ -17,3 +17,17 @@ btn.addEventListener("contextmenu", ()=>{
 document.addEventListener("keydown", (e)=>{
     console.log(e, e.key, e.keyCode)
 })
+
+
+// different ways
+
+// Inline arrow function (what you're doing)
+btn.addEventListener("click", () => {
+    alert("clicked!")
+})
+
+// Named function passed in — exactly the same behaviour
+function handleClick() {
+    alert("clicked!")
+}
+btn.addEventListener("click", handleClick)  // notice: no () here
