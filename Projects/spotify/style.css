@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: black;
+    color: white; /* font color */
+}
+
+.left{
+    width: 25vw;
+    padding: 10px;
+}
+
+.right{
+    width: 75vw;
+    margin: 16px 0;
+}
+/* 
+.home{
+
+} */
+
+.home ul li{
+    display: flex;
+    gap: 15px; /* set gap between icon and text */
+    width: 16px; /* top and bottom = 16 and left and right = 0 */
+    list-style: none;
+    padding-top: 15px;
+}
+
+.heading{
+    display: flex;
+    gap: 15px; /* set gap between icon and text */
+    width: 100%;
+    list-style: none;
+    padding-top: 15px;
+    padding: 23px 14px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.heading img{
+    width: 20px;
+}
+
+.library{
+    min-height: 80vh; /* add comment here*/
+    position: relative;
+}
+
+.footer{
+    display: flex;
+    font-size: 12px;
+    color: grey;
+    gap: 10px;
+    position: absolute; /* so that it does not move from the bottom */
+    bottom: 0; /* add comment here */
+    padding-bottom: 10px;
+}
+
+.footer a{
+    color: grey;
+}
+
+.header{
+    background-color: rgb(34, 34, 34);
+    display: flex;
+    justify-content: space-between; /* to have the elements in opposite ends */
+}
+
+.header > *{ /* just for all direct elements in header */
+    padding: 20px;
+}
+
