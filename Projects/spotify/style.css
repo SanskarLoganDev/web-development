@@ -19,6 +19,7 @@ body{
 
 .right{
     width: 75vw;
+    max-height: 100vh;
     margin: 16px 0;
 }
 /* 
@@ -62,6 +63,7 @@ body{
     position: absolute; /* so that it does not move from the bottom */
     bottom: 0; /* add comment here */
     padding-bottom: 10px;
+    padding: 10px;
 }
 
 .footer a{
@@ -95,6 +97,7 @@ body{
     padding: 10px;
     background-color: #1f1f1f;
     border-radius: 5px;
+    position: relative; /* add comment here */
 }
 
 .card > *{ /* everything inside the card class */
@@ -105,3 +108,21 @@ body{
     width: 100%;
     object-fit: contain;
 }
+
+.play {
+    width: 28px;
+    height: 28px;
+    background-color: #1ed760;
+    border-radius: 50%;
+    border: 2px solid black;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* add comment here */
+    top: 218px;
+    right: 17px;
+    opacity: 1;
+    transition: all 1s ease-out;
+}
+
