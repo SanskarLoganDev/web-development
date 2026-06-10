@@ -1,0 +1,2 @@
+1) The mismatch is clear. In urls.py:9, the URL captures are named num1 and num2, but in views.py:18, the function parameters are n1 and n2. Django passes captured URL values as keyword arguments matching the names in the URL pattern, so the names must match exactly.
+Fix — rename the view parameters to match the URL names

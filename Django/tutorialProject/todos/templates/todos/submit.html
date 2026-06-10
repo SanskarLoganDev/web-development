@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'post_example' %}">
+    {% csrf_token %} <!-- to avoid csrf errors-->
+    <input type="text" name="name", placeholder="Name">
+    <input type="text" name="age", placeholder="Age">
+    <input type="text" name="job", placeholder="Job">
+    <button type="submit"> Send POST </button>
+</form>
