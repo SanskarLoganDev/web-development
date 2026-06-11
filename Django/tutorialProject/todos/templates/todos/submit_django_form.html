@@ -1,5 +1,12 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}Django Forms{% endblock %}
+{% block content %}
+
 <form method="POST" action="{% url 'post_example' %}">
     {% csrf_token %} <!-- to avoid csrf errors-->
     {{ form.as_p}}
     <button type="submit"> Send POST </button>
 </form>
+
+{% endblock %}

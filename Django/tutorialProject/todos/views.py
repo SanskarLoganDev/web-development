@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import PersonForm # to create a PersonForm object and fill it with the data
+from .models import Todo
 
 # Create your views here. These are also called endpoints
 
@@ -51,3 +52,22 @@ def submit_example(request):
 def submit_django_form(request):
     form = PersonForm()
     return render(request, 'todos/submit_django_form.html', {'form': form})
+
+def template_view(request):
+    context = {
+        "name": "Logan",
+        "age": 30,
+        "skills": ["Python", "Django", "Terraform"]
+    }
+    
+    return render(request, "todos/template_demo.html", context)
+
+def todos_view(request):
+    if request.method == 'POST':
+        pass
+        
+        return
+    todos = Todo.objects.all()
+    
+    return render(request, 'todos/todos.html', {'todos': todos})
+    
