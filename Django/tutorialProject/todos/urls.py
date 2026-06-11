@@ -12,5 +12,6 @@ urlpatterns = [
     path('postend', views.post_example, name="post_example"),
     path('submit', views.submit_example, name="submit_example"),
     path('submit-django', views.submit_django_form, name="submit_django_example"),
-    path('templating', views.template_view, name="template")
+    path('templating', views.template_view, name="template"),
+    path('todos', views.todos_view, name="todos")
 ]

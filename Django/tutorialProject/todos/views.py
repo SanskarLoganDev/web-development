@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import PersonForm # to create a PersonForm object and fill it with the data
+from .forms import TodoForm
 from .models import Todo
 
 # Create your views here. These are also called endpoints
@@ -64,10 +65,20 @@ def template_view(request):
 
 def todos_view(request):
     if request.method == 'POST':
-        pass
+        form = TodoForm(request.POST)
         
-        return
-    todos = Todo.objects.all()
+        if form.is_valid():
+            todo = form.save()
+            return HttpResponse('Todo successfully created!')
     
-    return render(request, 'todos/todos.html', {'todos': todos})
+    # handling the GET request
+    # What the user sees: a list of their todos + a form to add a new one.
+    else:
+        form = TodoForm()
+        todos = Todo.objects.all()
+        # Todo — the model class, which maps to the todos_todo table in your database.
+        # .objects — every Django model automatically gets a "manager" called objects. It is the interface between your Python code and the database. You never create it yourself; Django adds it for free.
+        # .all() — tells the manager to fetch every row from the table. It returns a QuerySet, which behaves like a list.
+        
+        return render(request, 'todos/todos.html', {'form': form, 'todos': todos})
     

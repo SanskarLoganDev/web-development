@@ -23,7 +23,7 @@ class Todo(models.Model):
     description = models.CharField(max_length=500)
     done = models.BooleanField(default=False)
     deadline = models.DateField(null=True, blank=True)  # optional field
-    priority = models.IntegerField()
+    priority = models.IntegerField(choices=PriorityChoices.choices, null=True, blank=True)
 
     # __str__ is different from __init__.
     # __init__ is the constructor — called once when an object is first created in memory.
