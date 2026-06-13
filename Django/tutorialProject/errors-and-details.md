@@ -8,3 +8,10 @@ python manage.py migrate
 3) In a ModelForm, the class body is reserved for defining custom form fields — things you manually add or override. Django watches everything you define directly on the class and treats it as a field.
 
 The Meta class is a separate, dedicated namespace purely for configuration — telling Django which model to use, which fields to include, how to render them, etc. Django's ModelForm internals specifically look inside Meta for this config, and nowhere else.
+
+To create a superuser:
+python manage.py createsuperuser
+To include our database models, we need to register them in the admin interface. Open admin.py and add:
+from .models import Person, Todo
+admin.site.register(Person)
+admin.site.register(Todo)

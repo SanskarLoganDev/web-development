@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include # include allows you to include urls of other paths
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('todos.urls'))
 ]
+
+urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # to serve static files during development; in production, you would typically serve static files using a web server like Nginx instead of Django.
