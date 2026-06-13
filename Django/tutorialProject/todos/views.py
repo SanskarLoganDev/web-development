@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import PersonForm # to create a PersonForm object and fill it with the data
 from .forms import TodoForm
-from .models import Todo
+from .models import Todo, Person
 
 # Create your views here. These are also called endpoints
 
@@ -82,3 +82,18 @@ def todos_view(request):
         
         return render(request, 'todos/todos.html', {'form': form, 'todos': todos})
     
+# getting the todos of a specific person using the related_name we set in the model    
+def person_details(request, person_id):
+    person = Person.objects.filter(id = person_id).first() # filter returns a QuerySet, so we use .first() to get the first (and only) result, or None if no match is found.
+    return render(request, 'todos/person_details.html', {'person': person})
+
+def delete_todo(request, todo_id):
+    todo = Todo.objects.filter(id = todo_id).first()
+    todo.delete()
+    return HttpResponse('Todo deleted successfully!')
+
+def toggle_todo_done(request, todo_id):
+    todo = Todo.objects.filter(id = todo_id).first()
+    todo.done = not todo.done
+    todo.save()
+    return HttpResponse('Todo updated successfully!')

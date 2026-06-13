@@ -6,7 +6,7 @@
 
 <ul>
 {% for todo in todos %}
-    <li><b>{{ todo.id }} - {{ todo.title }}:</b> {{ todo.description }} (Done: {{ todo.done }})</li>
+    <li><b>{{ todo.id }} - {{ todo.title }}:</b> {{ todo.description }} (Done: {{ todo.done }}) (Owned by: {{ todo.owner.name}})</li>
 {% endfor %}
 </ul>
 

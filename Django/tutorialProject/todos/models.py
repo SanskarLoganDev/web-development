@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.id} - {self.name}"
+
 # PriorityChoices is NOT a database table.
 # It extends models.IntegerChoices, which is just a Python enum — a fixed set of named constants.
 # Only classes that extend models.Model become tables. This class is just used to restrict
@@ -24,7 +31,9 @@ class Todo(models.Model):
     done = models.BooleanField(default=False)
     deadline = models.DateField(null=True, blank=True)  # optional field
     priority = models.IntegerField(choices=PriorityChoices.choices, null=True, blank=True)
-
+    
+    owner = models.ForeignKey(Person, on_delete = models.CASCADE, related_name='todos', blank=True, null=True) # related_name allows us to access a person's todos via person.todos.all()
+    
     # __str__ is different from __init__.
     # __init__ is the constructor — called once when an object is first created in memory.
     # __str__ is called automatically by Python whenever it needs a string representation
