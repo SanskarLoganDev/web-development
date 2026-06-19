@@ -21,6 +21,7 @@ body{
     width: 75vw;
     max-height: 100vh;
     margin: 16px 0;
+    position: relative;
 }
 /* 
 .home{
@@ -160,4 +161,18 @@ body{
     background-color: rgb(208, 204, 204);
     font-weight: bold;
     font-size: 17px;
+}
+
+.playbar{
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(160, 231, 160);
+    width: 100%;
+    padding: 12px;
+}
+
+.songbuttons{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
