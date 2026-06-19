@@ -90,10 +90,12 @@ body{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    overflow-y: scroll; /* adding overflow here so that we can comfortably scroll inside the car container without messing other components */
+    max-height: 70vh;
 }
 
 .card{
-    width: 250px;
+    width: 220px;
     padding: 10px;
     background-color: #1f1f1f;
     border-radius: 5px;
@@ -125,4 +127,37 @@ body{
     opacity: 1;
     transition: all 1s ease-out;
 }
+.buttons > *{
+    margin: 0 12px; /* 0 from top bottom, 12 from left right */
+}
+.signupbtn{
+    background-color: rgb(34, 34, 34);
+    color: rgb(83, 79, 79);
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer; /* gets the hand pointer */
+}
 
+.signupbtn:hover{ /* to change color/style when we hover over an element */
+    font-size: 17px;
+    color: white;
+}
+
+.loginbtn{
+    background-color: white;
+    border-radius: 50px;
+    color: black;
+    padding: 10px;
+    font-weight: bold;
+    width: 80px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.loginbtn:hover{
+    background-color: rgb(208, 204, 204);
+    font-weight: bold;
+    font-size: 17px;
+}
